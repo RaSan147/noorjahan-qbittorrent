@@ -1,0 +1,323 @@
+
+/* ==========================================================================
+   NOORJAHAN  -  teal on warm stone (layer over Modern Default 1.3.0)
+   Appended to css/style.css by build.py.  Tokens below override section 1; the
+   layout rules turn the header, sidebar, transfer list and details panel into
+   12px-radius cards on an 8px canvas grid.  MochaUI subtracts #pageWrapper's
+   vertical margins and the header/footer offsetHeight when it sizes panels,
+   so the gaps need no JS changes.
+   ========================================================================== */
+
+@font-face { font-family: "Geist"; font-weight: 400; font-display: swap; src: url("fonts/Geist-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 500; font-display: swap; src: url("fonts/Geist-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 600 700; font-display: swap; src: url("fonts/Geist-SemiBold.woff2") format("woff2"); }
+
+:root {
+    --qbt-font-family: "Geist", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    --vg-canvas: #ECE8E1;
+    --vg-card: #FAF8F4;
+    --vg-line2: #ECE7DF;
+    --vg-chunk: #C4E2DB;
+    --vg-groove: rgba(28, 26, 22, 0.07);
+
+    --color-accent-blue: #1D786B;
+    --color-accent-blue-hover: #17695E;
+    --color-accent-blue-soft: #E3EEEA;
+    --color-text-blue: #17695E;
+    --color-text-orange: #8C6512;
+    --color-text-red: #B33A27;
+    --color-text-green: #3B8956;
+    --color-text-white: #FFFFFF;
+    --color-text-disabled: #B3ACA1;
+    --color-text-default: #1C1A16;
+    --color-text-muted: #7D766B;
+
+    --color-background-primary: #FAF8F4;
+    --color-background-blue: #1D786B;
+    --color-background-popup: #FAF8F4;
+    --color-background-default: #FAF8F4;
+    --color-background-secondary: #F3F0EA;
+    --color-background-hover: rgba(28, 26, 22, 0.05);
+    --color-background-selected: rgba(29, 120, 107, 0.13);
+
+    --color-border-blue: #1D786B;
+    --color-border-default: #DFD9CF;
+    --color-border-strong: #CBC3B6;
+
+    --qbt-radius-sm: 6px;
+    --qbt-radius-md: 8px;
+    --qbt-radius-lg: 12px;
+    --qbt-shadow-sm: 0 1px 2px rgba(28, 26, 22, 0.05);
+    --qbt-shadow-md: 0 6px 18px rgba(28, 26, 22, 0.09), 0 1px 3px rgba(28, 26, 22, 0.05);
+    --qbt-shadow-lg: 0 14px 34px rgba(28, 26, 22, 0.13), 0 2px 6px rgba(28, 26, 22, 0.05);
+    --qbt-scrollbar-thumb: rgba(28, 26, 22, 0.18);
+    --qbt-scrollbar-thumb-hover: rgba(28, 26, 22, 0.32);
+
+    & #torrentTrackersTableDiv tr {
+        --color-tracker-disabled: #8C857A;
+        --color-tracker-not-contacted: #8C6512;
+        --color-tracker-working: #3B8956;
+        --color-tracker-updating: #17695E;
+        --color-tracker-not-working: #B33A27;
+    }
+}
+
+:root.dark {
+    --vg-canvas: #0E1110;
+    --vg-card: #161B1A;
+    --vg-line2: #1F2624;
+    --vg-chunk: #1E4F48;
+    --vg-groove: rgba(255, 255, 255, 0.06);
+
+    --color-accent-blue: #52C3AF;
+    --color-accent-blue-hover: #6FD0BE;
+    --color-accent-blue-soft: #1B2E2B;
+    --color-text-blue: #6FD0BE;
+    --color-text-orange: #E2B653;
+    --color-text-red: #F27A64;
+    --color-text-green: #76C98E;
+    --color-text-white: #04201B;
+    --color-text-default: #E8E4DC;
+    --color-text-muted: #8A847A;
+    --color-text-disabled: #4E5451;
+
+    --color-background-primary: #161B1A;
+    --color-background-blue: #52C3AF;
+    --color-background-popup: #1C2220;
+    --color-background-default: #161B1A;
+    --color-background-secondary: #1C2220;
+    --color-background-hover: rgba(255, 255, 255, 0.05);
+    --color-background-selected: rgba(82, 195, 175, 0.15);
+
+    --color-border-blue: #52C3AF;
+    --color-border-default: #262E2C;
+    --color-border-strong: #36403D;
+
+    --qbt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --qbt-shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+    --qbt-shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.55);
+    --qbt-scrollbar-thumb: rgba(255, 255, 255, 0.12);
+    --qbt-scrollbar-thumb-hover: rgba(255, 255, 255, 0.22);
+
+    & #torrentTrackersTableDiv tr {
+        --color-tracker-disabled: #706B63;
+        --color-tracker-not-contacted: #E2B653;
+        --color-tracker-working: #76C98E;
+        --color-tracker-updating: #6FD0BE;
+        --color-tracker-not-working: #F27A64;
+    }
+
+    /* the Noorjahan icons carry their own dark palette */
+    .mochaToolButton,
+    .MyMenuIcon,
+    .filterTitle img,
+    .panel-collapse,
+    .panel-expand {
+        filter: none;
+    }
+}
+
+/* ------------------------------------------------------------ canvas + cards */
+
+body:has(#desktop),
+html #desktop,
+html #pageWrapper,
+html #pageWrapper .column {
+    background-color: var(--vg-canvas);
+}
+
+/* top card: menu bar + toolbar. Padding (not margin) so it counts in the
+   header's offsetHeight, which MochaUI subtracts from the page height. */
+html #desktopHeader {
+    background-color: var(--vg-canvas);
+    padding: 8px 8px 0;
+}
+
+html #desktopNavbar {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default);
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    padding: 2px 4px 0;
+}
+
+html #mochaToolbar {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default);
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+    min-height: 50px;
+    padding: 6px 10px 8px;
+}
+
+/* the bundled mocha.min.js subtracts #pageWrapper's top/bottom *borders* (not
+   margins) from the page height, so the vertical gaps are canvas borders on a
+   content-box wrapper; the side gaps are plain margins */
+html #pageWrapper {
+    background-clip: padding-box;
+    border: 0;
+    border-bottom: 8px solid var(--vg-canvas);
+    border-top: 8px solid var(--vg-canvas);
+    box-sizing: content-box;
+    margin: 0 8px;
+}
+
+/* gaps between cards: the resize handles are 8px of canvas; a short accent
+   bar shows on hover / drag */
+html .columnHandle {
+    background: var(--vg-canvas) !important;
+    border: 0 !important;
+    width: 8px;
+}
+
+html .columnHandle:hover,
+html .columnHandle:active {
+    background: linear-gradient(var(--color-accent-blue), var(--color-accent-blue)) center / 2px 40px no-repeat var(--vg-canvas) !important;
+}
+
+html .horizontalHandle {
+    background: var(--vg-canvas);
+    height: 8px;
+}
+
+html .horizontalHandle:hover,
+html .horizontalHandle:active {
+    background: linear-gradient(var(--color-accent-blue), var(--color-accent-blue)) center / 40px 2px no-repeat var(--vg-canvas);
+}
+
+html .horizontalHandle .handleIcon {
+    height: 8px;
+    opacity: 0;
+}
+
+/* sidebar card */
+html #Filters {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default) !important;
+    border-radius: 12px;
+    padding: 8px 0 12px;
+}
+
+/* transfer list card */
+html #transferList {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: 12px;
+}
+
+/* details card: tab header + pages share one outline */
+html #propertiesPanel_header {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default);
+    border-bottom: 1px solid var(--vg-line2);
+    border-radius: 12px 12px 0 0;
+}
+
+html #propertiesPanel {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default);
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+}
+
+html .panelWrapper.collapsed #propertiesPanel_header {
+    border-bottom: 1px solid var(--color-border-default);
+    border-radius: 12px;
+}
+
+/* search / RSS / log tabs */
+html #SearchPanel,
+html #RssPanel,
+html #LogPanel {
+    background-color: var(--vg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: 12px;
+}
+
+/* status bar sits on the canvas, no rule above it */
+html #desktopFooterWrapper {
+    background-color: var(--vg-canvas);
+    border-top: 0;
+    height: 32px;
+}
+
+html #desktopFooter {
+    background-color: var(--vg-canvas);
+    color: var(--color-text-muted);
+    height: 32px;
+    padding: 0 14px;
+}
+
+/* ------------------------------------------------------------ transfer list */
+
+/* 32px rows: dynamicTable.js TorrentsTable rowHeight is 32 to match
+   (compact density keeps upstream's 20px) */
+html #transferList .dynamicTable td {
+    height: 32px;
+    line-height: 20px;
+    padding: 6px 10px;
+}
+
+html #transferList .dynamicTable thead th {
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+/* downloading rows are blue, like the desktop theme: row text plus the progress
+   fill (progressbar.js reads --vg-chunk through its shadow root). The state is
+   read from the row's status icon class. */
+:root {
+    --vg-dl-text: #2F5E92;
+    --vg-dl-chunk: #C9D9EE;
+    --vg-dlstall-text: #4F6F94;
+    --vg-dlstall-chunk: #D7E1EE;
+}
+
+:root.dark {
+    --vg-dl-text: #8DB4E4;
+    --vg-dl-chunk: #20406A;
+    --vg-dlstall-text: #9FB6D3;
+    --vg-dlstall-chunk: #26384F;
+}
+
+html #transferList .dynamicTable tr:has(.stateDownloading) {
+    --vg-chunk: var(--vg-dl-chunk);
+}
+
+html #transferList .dynamicTable tr:has(.stateDownloading) td {
+    color: var(--vg-dl-text);
+}
+
+html #transferList .dynamicTable tr:has(.stateStalledDL) {
+    --vg-chunk: var(--vg-dlstall-chunk);
+}
+
+html #transferList .dynamicTable tr:has(.stateStalledDL) td {
+    color: var(--vg-dlstall-text);
+}
+
+/* ------------------------------------------------------------ type */
+
+html #desktopNavbar > ul > li > a,
+html #mainWindowTabs .tab-menu li a {
+    font-weight: 500;
+}
+
+html .filterTitle {
+    color: var(--color-text-default);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+/* section headers: chevron on the right, like the desktop sidebar */
+html .filterTitle img {
+    content: url("../images/collapse.svg");
+    height: 16px;
+    margin-left: auto;
+    margin-right: 12px;
+    opacity: 1;
+    order: 2;
+    width: 16px;
+}

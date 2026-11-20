@@ -1,0 +1,1501 @@
+/*
+ * qBittorrent Modern Default — Production Theme
+ * Based on official qBittorrent 5.2.x WebUI
+ */
+
+/* ==========================================================================
+   1. Adaptive Design Tokens & Color Palette
+   ========================================================================== */
+
+:root {
+    /* System font stack */
+    --qbt-font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "Inter", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --qbt-font-mono: "Cascadia Code", "SF Mono", "Segoe UI Variable Text", "Segoe UI Mono", Menlo, Consolas, ui-monospace, monospace;
+
+    /* Semantic core */
+    --color-accent-blue: hsl(211deg 86% 48%);
+    --color-accent-blue-hover: hsl(211deg 86% 42%);
+    --color-accent-blue-soft: hsl(211deg 85% 95%);
+    --color-text-blue: hsl(211deg 86% 48%);
+    --color-text-orange: hsl(35deg 92% 44%);
+    --color-text-red: hsl(0deg 75% 52%);
+    --color-text-green: hsl(142deg 65% 38%);
+    --color-text-white: hsl(0deg 0% 100%);
+    --color-text-disabled: hsl(220deg 10% 64%);
+    --color-text-default: hsl(220deg 24% 15%);
+    --color-text-muted: hsl(220deg 12% 46%);
+
+    /* Backgrounds & surfaces */
+    --color-background-primary: hsl(0deg 0% 100%);
+    --color-background-blue: hsl(211deg 86% 48%);
+    --color-background-popup: hsl(0deg 0% 100%);
+    --color-background-default: hsl(210deg 20% 97%);
+    --color-background-secondary: hsl(210deg 18% 95%);
+    --color-background-hover: hsl(211deg 70% 96%);
+    --color-background-selected: hsl(211deg 80% 92%);
+
+    /* Borders */
+    --color-border-blue: hsl(211deg 86% 48%);
+    --color-border-default: hsl(214deg 16% 88%);
+    --color-border-strong: hsl(214deg 18% 76%);
+
+    /* Radii & Shadows */
+    --qbt-radius-sm: 4px;
+    --qbt-radius-md: 6px;
+    --qbt-radius-lg: 8px;
+    --qbt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --qbt-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --qbt-shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+
+    /* Scrollbars */
+    --qbt-scrollbar-thumb: hsl(220deg 12% 76%);
+    --qbt-scrollbar-thumb-hover: hsl(220deg 14% 60%);
+
+    --color-icon-hover: none;
+
+    & #torrentTrackersTableDiv tr {
+        --color-tracker-disabled: hsl(240deg 5% 50%);
+        --color-tracker-not-contacted: hsl(35deg 92% 44%);
+        --color-tracker-working: hsl(142deg 65% 38%);
+        --color-tracker-updating: hsl(211deg 86% 48%);
+        --color-tracker-not-working: hsl(0deg 75% 52%);
+    }
+
+    &:not(.dark) {
+        color-scheme: light;
+    }
+
+    &.dark {
+        --color-accent-blue: hsl(211deg 88% 62%);
+        --color-accent-blue-hover: hsl(211deg 88% 68%);
+        --color-accent-blue-soft: hsl(211deg 35% 18%);
+        --color-text-blue: hsl(211deg 88% 68%);
+        --color-text-orange: hsl(36deg 85% 62%);
+        --color-text-red: hsl(0deg 75% 65%);
+        --color-text-green: hsl(142deg 62% 52%);
+        --color-text-default: hsl(220deg 20% 93%);
+        --color-text-muted: hsl(220deg 12% 65%);
+        --color-text-disabled: hsl(220deg 10% 45%);
+
+        --color-background-primary: hsl(220deg 18% 10%);
+        --color-background-blue: hsl(211deg 88% 62%);
+        --color-background-popup: hsl(220deg 16% 14%);
+        --color-background-default: hsl(220deg 15% 13%);
+        --color-background-secondary: hsl(220deg 14% 16%);
+        --color-background-hover: hsl(215deg 25% 20%);
+        --color-background-selected: hsl(211deg 55% 24%);
+
+        --color-border-default: hsl(220deg 12% 23%);
+        --color-border-strong: hsl(220deg 14% 34%);
+
+        --qbt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --qbt-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+        --qbt-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+        --qbt-scrollbar-thumb: hsl(220deg 12% 30%);
+        --qbt-scrollbar-thumb-hover: hsl(220deg 14% 42%);
+
+        & #torrentTrackersTableDiv tr {
+            --color-tracker-disabled: hsl(240deg 6% 65%);
+            --color-tracker-not-contacted: hsl(38deg 88% 62%);
+            --color-tracker-working: hsl(142deg 60% 55%);
+            --color-tracker-updating: hsl(211deg 88% 65%);
+            --color-tracker-not-working: hsl(0deg 80% 68%);
+        }
+
+        color-scheme: dark;
+
+        #rssButtonBar img,
+        #startSearchButton img,
+        #manageSearchPlugins img {
+            filter: brightness(0) saturate(100%) invert(95%);
+        }
+
+        .mochaToolButton,
+        .MyMenuIcon {
+            filter: brightness(1.25) contrast(1.1);
+        }
+    }
+}
+
+/* ==========================================================================
+   2. Reset & Global Typography
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-default);
+    font-family: var(--qbt-font-family);
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root.compact body {
+    --icon-size: 13px;
+    line-height: 1.25;
+}
+
+/* Modal iframes */
+body:not(:has(#desktop)) {
+    background-color: var(--color-background-popup);
+}
+
+.aside {
+    width: 300px;
+}
+
+/* !important: several themed containers set display by id (#mochaToolbar, the
+   status bar), which would otherwise outrank this class and make
+   View > Top Toolbar / Status Bar do nothing. */
+.invisible {
+    display: none !important;
+}
+
+/* Tabular Numerals */
+.dynamicTable td,
+#desktopFooter td,
+.statisticsValue,
+td.generalLabel + td {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Headings */
+h2, h3, h4 {
+    font-family: var(--qbt-font-family);
+    font-weight: 600;
+}
+
+h2 {
+    color: var(--color-text-default);
+    font-size: 14px;
+    padding: 0 0 4px;
+}
+
+#mochaPage h3 {
+    border-bottom: 1px solid var(--color-border-default);
+    color: var(--color-text-default);
+    display: block;
+    font-size: 13px;
+    margin: 0 0 8px;
+    padding: 6px 0;
+}
+
+h4 {
+    font-size: 12px;
+}
+
+#error_div,
+#rename_error {
+    color: var(--color-text-red);
+    float: left;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+a {
+    color: var(--color-accent-blue);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.12s ease;
+}
+
+a:hover {
+    color: var(--color-accent-blue-hover);
+    text-decoration: none;
+}
+
+p {
+    padding: 0 0 8px;
+}
+
+dt {
+    font-weight: 600;
+}
+
+dd {
+    padding: 0 0 8px;
+}
+
+/* ==========================================================================
+   3. Forms & Controls
+   ========================================================================== */
+
+input[type="search"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea {
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    color: var(--color-text-default);
+    font-family: inherit;
+    font-size: 13px;
+    background-color: var(--color-background-primary);
+    padding: 5px 9px;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 2px var(--color-accent-blue-soft);
+    outline: none;
+}
+
+/* Modern Sleek Browser Dropdown (<select>) */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--color-background-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-position: right 9px center;
+    background-repeat: no-repeat;
+    background-size: 11px 11px;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    color: var(--color-text-default);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: normal;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 28px 0 9px;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+    vertical-align: middle;
+}
+
+:root.dark select,
+html.dark select,
+.dark select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+select:hover:not(:disabled) {
+    background-color: var(--color-background-hover);
+    border-color: var(--color-border-strong);
+}
+
+select:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 2px var(--color-accent-blue-soft);
+    outline: none;
+}
+
+select:disabled {
+    background-color: var(--color-background-secondary);
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+select option,
+select optgroup {
+    background-color: var(--color-background-popup) !important;
+    color: var(--color-text-default) !important;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 10px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--color-accent-blue);
+    cursor: pointer;
+    margin: 3px 4px;
+    vertical-align: middle;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    color: var(--color-text-default);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 14px;
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+    vertical-align: middle;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button:hover {
+    background-color: var(--color-background-hover);
+    border-color: var(--color-border-strong);
+}
+
+input[type="submit"],
+button.primaryButton {
+    background-color: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
+    color: var(--color-text-white);
+}
+
+input[type="submit"]:hover,
+button.primaryButton:hover {
+    background-color: var(--color-accent-blue-hover);
+    border-color: var(--color-accent-blue-hover);
+}
+
+button:disabled,
+input:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+fieldset {
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    margin: 4px 0 10px;
+    padding: 8px 10px;
+}
+
+fieldset.settings {
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    padding: 6px 10px 8px;
+    margin-bottom: 8px;
+}
+
+fieldset.settings legend {
+    color: var(--color-text-default);
+    font-weight: 600;
+    margin-left: 4px;
+    padding: 0 4px;
+}
+
+fieldset.settings label {
+    padding: 2px 0;
+}
+
+/* not data tables: their cells must keep the fixed row height (Add Torrent file list) */
+fieldset.settings table:not(.dynamicTable) td {
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+fieldset.settings table td label {
+    color: var(--color-text-default);
+    font-size: 13px;
+}
+
+.formRow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    margin: 2px 0;
+    min-height: 26px;
+}
+
+.formRow label {
+    color: var(--color-text-default);
+    font-size: 13px;
+    user-select: none;
+}
+
+pre {
+    background-color: var(--color-background-default);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    color: var(--color-text-default);
+    font-family: var(--qbt-font-mono);
+    font-size: 11px;
+    margin: 0 0 10px;
+    max-height: 250px;
+    overflow: auto;
+    padding: 8px 10px;
+}
+
+hr {
+    background-color: var(--color-border-default);
+    border: 0;
+    height: 1px;
+    margin: 8px 0;
+}
+
+/* ==========================================================================
+   4. Top Toolbar (#mochaToolbar)
+   ========================================================================== */
+
+#mochaToolbar {
+    align-items: center;
+    background-color: var(--color-background-default);
+    border-bottom: 1px solid var(--color-border-default);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    height: auto !important;
+    margin: 0;
+    min-height: 44px;
+    overflow: hidden;
+    padding: 5px 8px;
+    position: relative;
+    user-select: none;
+}
+
+#mochaToolbar #uploadButton {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+#mochaToolbar > a,
+#mochaToolbar #uploadButton label,
+#mochaToolbar #queueingButtons a {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    height: 32px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+    width: 32px;
+}
+
+#mochaToolbar > a:hover,
+#mochaToolbar #uploadButton label:hover,
+#mochaToolbar #queueingButtons a:hover {
+    background-color: var(--color-background-hover);
+    border-color: var(--color-border-default);
+}
+
+#mochaToolbar > a:active,
+#mochaToolbar #uploadButton label:active,
+#mochaToolbar #queueingButtons a:active {
+    background-color: var(--color-background-selected);
+}
+
+#mochaToolbar #queueingButtons {
+    align-items: center;
+    display: inline-flex;
+    gap: 3px;
+}
+
+#mochaToolbar a.divider {
+    margin-left: 8px;
+    position: relative;
+}
+
+#mochaToolbar a.divider::before {
+    background-color: var(--color-border-default);
+    bottom: 6px;
+    content: "";
+    left: -5px;
+    position: absolute;
+    top: 6px;
+    width: 1px;
+}
+
+.mochaToolButton {
+    display: block;
+    height: 18px !important;
+    margin: 0;
+    pointer-events: none;
+    width: 18px !important;
+}
+
+.MyMenuIcon {
+    display: inline-block;
+    flex-shrink: 0;
+    height: 16px !important;
+    margin: 0 !important;
+    max-height: 16px !important;
+    max-width: 16px !important;
+    min-height: 16px !important;
+    min-width: 16px !important;
+    object-fit: contain;
+    padding: 0 !important;
+    vertical-align: middle;
+    width: 16px !important;
+}
+
+#mainWindowTabs {
+    align-items: center;
+    display: inline-flex;
+    flex-shrink: 0;
+    margin: 0 8px;
+}
+
+#mainWindowTabs .tab-menu {
+    align-items: center;
+    border-bottom: none;
+    display: flex;
+    gap: 3px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#mainWindowTabs .tab-menu li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#mainWindowTabs .tab-menu li a {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    font-weight: 500;
+    gap: 6px;
+    height: 30px;
+    padding: 0 10px;
+    text-decoration: none;
+    transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+#mainWindowTabs .tab-menu li a:hover {
+    background-color: var(--color-background-hover);
+    color: var(--color-text-default);
+}
+
+#mainWindowTabs .tab-menu li.selected a {
+    background-color: var(--color-background-selected) !important;
+    border-color: transparent !important;
+    color: var(--color-accent-blue) !important;
+    font-weight: 600;
+}
+
+#mainWindowTabs .tab-menu li a img {
+    flex-shrink: 0;
+    height: 15px;
+    margin: 0;
+    width: 15px;
+}
+
+#torrentsFilterToolbar {
+    align-items: center;
+    display: inline-flex;
+    gap: 6px;
+    height: 100%;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+#torrentsFilterToolbar.invisible {
+    display: none !important;
+}
+
+#torrentsFilterInput {
+    background-color: var(--color-background-primary);
+    background-image: url("../images/edit-find.svg");
+    background-position: 9px center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    color: var(--color-text-default);
+    font-family: inherit;
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    min-width: 190px;
+    outline: none;
+    padding: 0 10px 0 30px;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+#torrentsFilterInput:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 2px var(--color-accent-blue-soft);
+}
+
+#torrentsFilterRegexBox {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+}
+
+#torrentsFilterRegexBox + label {
+    align-items: center;
+    background-color: var(--color-background-primary);
+    background-image: url("../images/regex.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: 30px;
+    justify-content: center;
+    margin: 0;
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+    width: 30px;
+}
+
+#torrentsFilterRegexBox:hover + label {
+    background-color: var(--color-background-hover);
+    border-color: var(--color-border-strong);
+}
+
+#torrentsFilterRegexBox:checked + label {
+    background-color: var(--color-background-selected);
+    border-color: var(--color-accent-blue);
+}
+
+#torrentsFilterToolbar label[for="torrentsFilterSelect"] {
+    align-items: center;
+    color: var(--color-text-muted);
+    display: inline-flex;
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 2px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+#torrentsFilterSelect {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--color-background-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-position: right 9px center;
+    background-repeat: no-repeat;
+    background-size: 11px 11px;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    color: var(--color-text-default);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 28px;
+    outline: none;
+    padding: 0 28px 0 10px;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+    vertical-align: middle;
+}
+
+:root.dark #torrentsFilterSelect {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+#torrentsFilterSelect:hover {
+    border-color: var(--color-border-strong);
+    background-color: var(--color-background-hover);
+}
+
+#torrentsFilterSelect:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 2px var(--color-accent-blue-soft);
+}
+
+#torrentsFilterSelect option {
+    background-color: var(--color-background-popup);
+    color: var(--color-text-default);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 10px;
+}
+
+/* ==========================================================================
+   5. Left Sidebar (#Filters)
+   ========================================================================== */
+
+#Filters {
+    background-color: var(--color-background-default);
+    border-right: 1px solid var(--color-border-default);
+    overflow-x: hidden !important;
+    padding: 6px 0 12px;
+    user-select: none;
+}
+
+.filterWrapper + .filterWrapper {
+    margin-top: 6px;
+}
+
+.filterTitle {
+    align-items: center;
+    border-radius: var(--qbt-radius-sm);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    font-size: 11px;
+    font-weight: 700;
+    gap: 6px;
+    letter-spacing: 0.7px;
+    margin: 0 8px;
+    padding: 7px 6px 5px;
+    text-transform: uppercase;
+    transition: color 0.1s ease;
+}
+
+.filterTitle:hover {
+    color: var(--color-text-default);
+}
+
+.filterTitle img {
+    height: 12px;
+    opacity: 0.75;
+    transition: transform 0.15s ease;
+    width: 12px;
+}
+
+ul.filterList {
+    margin: 0;
+    padding: 0 8px;
+}
+
+ul.filterList span.link {
+    align-items: center;
+    border-radius: var(--qbt-radius-md);
+    color: var(--color-text-default);
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
+    gap: 9px;
+    height: 28px;
+    line-height: 28px;
+    margin: 1px 0;
+    overflow: hidden;
+    padding: 0 8px;
+    position: relative;
+    transition: background-color 0.1s ease, color 0.1s ease;
+    white-space: nowrap;
+}
+
+ul.filterList span.link:hover {
+    background-color: var(--color-background-hover);
+    color: var(--color-text-default);
+}
+
+.selectedFilter > span.link {
+    background-color: var(--color-accent-blue-soft) !important;
+    color: var(--color-accent-blue) !important;
+    font-weight: 600;
+}
+
+/* accent bar on the selected filter */
+.selectedFilter > span.link::before {
+    background-color: var(--color-accent-blue);
+    border-radius: 0 2px 2px 0;
+    bottom: 6px;
+    content: "";
+    left: 0;
+    position: absolute;
+    top: 6px;
+    width: 3px;
+}
+
+ul.filterList span.link :is(img, button) {
+    flex-shrink: 0;
+    height: 16px;
+    width: 16px;
+}
+
+/* nested categories indent under their parent */
+.subcategories ul.filterList {
+    padding-left: 14px;
+    padding-right: 0;
+}
+
+/* Clean category toggle */
+.categoryToggle {
+    background: url("../images/go-down.svg") center center / 12px no-repeat transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+    height: 16px;
+    margin-right: -3px;
+    opacity: 0.8;
+    padding: 2px;
+    transition: transform 0.15s ease;
+    width: 16px;
+}
+
+/* ==========================================================================
+   6. Context Menus (.contextMenu)
+   ========================================================================== */
+
+.contextMenu {
+    background-color: var(--color-background-popup);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-lg);
+    box-shadow: var(--qbt-shadow-md);
+    display: none;
+    min-width: 200px;
+    opacity: 0;
+    padding: 5px;
+    position: absolute;
+    transition: opacity 0.12s ease, visibility 0.12s ease;
+    visibility: hidden;
+    z-index: 10000;
+}
+
+.contextMenu.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.contextMenu .separator,
+.contextMenu .separatorBottom,
+.contextMenu li.divider {
+    border: none;
+    border-top: 1px solid var(--color-border-default);
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+.contextMenu li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+.contextMenu li.disabled {
+    cursor: default;
+    opacity: 0.45;
+}
+
+.contextMenu li.disabled a {
+    pointer-events: none;
+}
+
+.contextMenu li a {
+    align-items: center;
+    border-radius: var(--qbt-radius-sm);
+    box-sizing: border-box;
+    color: var(--color-text-default);
+    display: flex;
+    font-size: 13px;
+    gap: 10px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 10px;
+    position: relative;
+    text-decoration: none;
+    transition: background-color 0.1s ease, color 0.1s ease;
+    white-space: nowrap;
+}
+
+.contextMenu li a:hover {
+    background-color: var(--color-background-hover);
+    color: var(--color-text-default);
+}
+
+.contextMenu li a.arrow-right::after {
+    border: solid currentcolor;
+    border-width: 0 1.5px 1.5px 0;
+    content: "";
+    display: inline-block;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 4px;
+    padding: 2px;
+    transform: rotate(-45deg);
+}
+
+/* contextmenu.js measures each submenu and places it with margins relative to
+   its static position, so it must stay rendered (parked off-screen) and must
+   not be given left/top offsets of its own. */
+.contextMenu li ul {
+    background: var(--color-background-popup);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-lg);
+    box-shadow: var(--qbt-shadow-md);
+    left: -999em;
+    margin: -31px 0 0 100%;
+    min-width: 180px;
+    padding: 5px;
+    position: absolute;
+    width: max-content;
+    z-index: 8000;
+}
+
+.contextMenu li:not(.disabled):hover > ul {
+    left: auto;
+}
+
+.contextMenu li input[type="checkbox"] {
+    flex-shrink: 0;
+    height: 14px;
+    margin: 0 1px;
+    width: 14px;
+}
+
+#contextCategoryList img {
+    border-radius: 3px;
+    box-sizing: content-box;
+    padding: 1px;
+}
+
+.contextMenu li img {
+    flex-shrink: 0;
+    height: 16px !important;
+    margin: 0 !important;
+    max-height: 16px !important;
+    max-width: 16px !important;
+    min-height: 16px !important;
+    min-width: 16px !important;
+    object-fit: contain;
+    width: 16px !important;
+}
+
+/* ==========================================================================
+   7. Details & Properties Panel (#propertiesPanel)
+   ========================================================================== */
+
+#properties {
+    background-color: var(--color-background-default);
+}
+
+td.generalLabel {
+    color: var(--color-text-muted);
+    font-weight: 500;
+    padding: 3px 8px;
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 1px;
+}
+
+td.fullWidth {
+    box-sizing: border-box;
+    max-width: none;
+    padding: 3px 8px;
+    width: 100%;
+    word-break: break-all;
+}
+
+td.noWrap {
+    padding: 3px 8px;
+    white-space: nowrap;
+}
+
+a.propButton {
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    margin: 0 2px;
+    padding: 3px 6px;
+    transition: background-color 0.12s ease;
+}
+
+a.propButton:hover {
+    background-color: var(--color-background-hover);
+}
+
+#propBarsWrapper {
+    align-items: center;
+    display: grid;
+    gap: 6px 10px;
+    grid-template-columns: auto 1fr auto;
+    height: auto;
+    margin: 6px 4px;
+}
+
+.propBarLabel {
+    color: var(--color-text-muted);
+    font-size: 11.5px;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* ==========================================================================
+   8. Status Bar (#desktopFooter)
+   ========================================================================== */
+
+#desktopFooter {
+    align-items: center;
+    background-color: var(--color-background-default);
+    color: var(--color-text-default);
+    display: flex;
+    font-size: 12px;
+    height: 28px;
+    padding: 0 8px;
+    user-select: none;
+}
+
+#desktopFooter td {
+    padding: 0 4px;
+    vertical-align: middle;
+}
+
+td.statusBarSeparator {
+    background: none;
+    border-left: 1px solid var(--color-border-default);
+    height: 14px;
+    margin: 0 4px;
+    padding: 0;
+    width: 1px;
+}
+
+td.speedLabel {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   9. Scrollbars
+   ========================================================================== */
+
+* {
+    scrollbar-color: var(--qbt-scrollbar-thumb) transparent;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--qbt-scrollbar-thumb);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--qbt-scrollbar-thumb-hover);
+}
+
+/* ==========================================================================
+   10. Modals & Dialogs
+   ========================================================================== */
+
+.modalDialog .mochaContent.pad {
+    display: flex !important;
+    flex-direction: column;
+    height: 100%;
+}
+
+.modalDialog .mochaContent.pad > :last-child {
+    align-self: flex-end;
+}
+
+.genericConfirmGrid,
+.confirmDeletionGrid {
+    align-items: center;
+    display: grid;
+    gap: 4px 8px;
+    grid-template-columns: max-content 1fr;
+    margin-bottom: 12px;
+}
+
+.confirmWarning,
+.confirmDialogWarning {
+    background: url("../images/dialog-warning.svg") center center no-repeat;
+    height: 32px;
+    width: 32px;
+}
+
+.confirmWarning {
+    background-image: url("../images/help-about.svg");
+}
+
+/* Statistics Window */
+#statisticsContent table {
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-md);
+    margin-bottom: 8px;
+    padding: 8px 12px;
+}
+
+#statisticsContent table .statisticsValue {
+    font-weight: 600;
+    text-align: right;
+}
+
+/* ==========================================================================
+   Restored upstream rules + audit fixes (2026-10-01)
+   These selectors are used by unchanged upstream HTML/JS and had no styling.
+   ========================================================================== */
+
+/* Details pane: give the tab content a height chain so tables get a bounded,
+   scrollable box and the virtual list can measure itself. */
+.propertiesTabContent {
+    height: 100%;
+}
+
+.propertiesTabContent > div {
+    height: 100%;
+}
+
+/* Files filter box sits inside the 34px properties header, right-aligned */
+#torrentFilesFilterToolbar {
+    align-items: center;
+    display: flex;
+    float: right;
+    height: 28px;
+    margin-right: 6px;
+}
+
+#torrentFilesFilterInput {
+    background: url("../images/edit-find.svg") 6px center / 14px no-repeat var(--color-background-primary);
+    height: 24px;
+    padding: 0 6px 0 26px;
+    width: 200px;
+}
+
+/* Sidebar category collapse / toggles */
+.collapsedCategory > ul {
+    display: none;
+}
+
+.collapsedCategory .categoryToggle,
+.filterTitle img.rotate {
+    transform: rotate(-90deg);
+}
+
+.subcategories,
+.subcategories ul {
+    margin: 0;
+    padding: 0;
+}
+
+.subcategories .categoryToggle {
+    display: inline-block;
+    visibility: hidden;
+}
+
+/* Compact density: match the 20px row height used by dynamicTable.js */
+:root.compact #transferList .dynamicTable td {
+    font-size: 12px;
+    height: 20px;
+    line-height: 16px;
+    padding: 2px 5px;
+}
+
+/* Search tab: bounded, scrollable results */
+#SearchPanel,
+#SearchPanel_wrapper,
+#SearchPanel_pad {
+    height: inherit;
+}
+
+#searchResults {
+    height: 100%;
+    padding: 0 20px;
+}
+
+#searchResultsTableContainer {
+    height: calc(100% - 177px);
+    overflow: auto;
+}
+
+#searchResults .numSearchResults {
+    font-style: italic;
+}
+
+.red {
+    color: var(--color-text-red);
+}
+
+.green {
+    color: var(--color-text-green);
+}
+
+/* Add trackers / web seeds dialogs */
+#urls {
+    height: 100%;
+    width: 90%;
+}
+
+#trackersUrls {
+    display: block;
+    height: 100%;
+    margin: 0 auto 10px;
+    width: 90%;
+}
+
+/* Priority dropdown inside table rows */
+.combo_priority {
+    font-size: 1em;
+    height: 20px;
+    line-height: 18px;
+    min-width: 0;
+    padding: 0 20px 0 6px;
+    vertical-align: top;
+}
+
+:root.compact .combo_priority {
+    height: 18px;
+    line-height: 16px;
+}
+
+/* Editable watched-folder combo */
+.select-watched-folder-editable {
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--qbt-radius-sm);
+    height: 24px;
+    position: relative;
+    width: 160px;
+}
+
+.select-watched-folder-editable select {
+    border: none;
+    bottom: 0;
+    height: 22px;
+    left: 0;
+    line-height: 22px;
+    min-width: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 158px;
+}
+
+.select-watched-folder-editable input {
+    border: none;
+    height: 22px;
+    left: 0;
+    padding: 0 4px;
+    position: absolute;
+    top: 0;
+    width: 134px;
+}
+
+.select-watched-folder-editable select:focus,
+.select-watched-folder-editable input:focus {
+    outline: none;
+}
+
+/* Delete confirmation dialog */
+#rememberBtn {
+    background: url("../images/object-locked.svg") center center / 24px no-repeat var(--color-background-popup);
+    height: 38px;
+    padding: 4px 6px;
+    width: 38px;
+}
+
+#rememberBtn.disabled {
+    filter: grayscale(100%);
+}
+
+#deleteFromDiskCB {
+    margin: 0 2px 0 0;
+    vertical-align: -1px;
+}
+
+.deletionGridItem:first-child {
+    justify-self: center;
+}
+
+.dialogMessage {
+    overflow-wrap: anywhere;
+}
+
+/* Context menu: scrollable category/tag lists, highlighted current category */
+.scrollableMenu {
+    overflow: hidden auto;
+}
+
+#contextCategoryList img.highlightedCategoryIcon {
+    background-color: var(--color-background-selected);
+    border-radius: 3px;
+}
+
+/* Files/trackers tree collapse arrow */
+.filesTableCollapseIcon {
+    cursor: pointer;
+    height: var(--icon-size, 15px);
+    margin-right: 5px;
+    vertical-align: top;
+    width: var(--icon-size, 15px);
+}
+
+.filesTableCollapseIcon.rotate {
+    transform: rotate(270deg);
+}
+
+/* Misc restored */
+.unselectable {
+    user-select: none;
+}
+
+#watched_folders_tab td,
+#watched_folders_tab th {
+    border: 1px solid var(--color-border-default);
+    padding: 2px 4px;
+}
+
+#filtersColumn_handle {
+    margin-left: -1px;
+}
+
+
+/* Dark mode: lift the neutral-grey line icons so they read clearly */
+:root.dark .filterTitle img,
+:root.dark .panel-collapse,
+:root.dark .panel-expand,
+:root.dark .filesTableCollapseIcon,
+:root.dark .dynamicTable th.sorted img {
+    filter: brightness(1.6);
+}
+
+/* Restored (round 2) */
+.vcenter {
+    vertical-align: middle;
+}
+
+.slider {
+    font-size: 12px;
+    font-weight: 600;
+    margin: 4px;
+    position: relative;
+}
+
+.update {
+    padding-bottom: 5px;
+}
+
+#tristate_cb {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+#propGeneral {
+    padding: 2px;
+}
+
+#propAvailabilityWrapper {
+    display: contents;
+}
+
+.confirmGridItem,
+.deletionGridItem {
+    padding: 3px;
+}
+
+/* ==========================================================================
+   Audit round 3 (1.3.0, 2026-10-02)
+   ========================================================================== */
+
+/* Sidebar: long category / tag / tracker names truncate instead of pushing the count out of view */
+span.link :last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.filterTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Options > Downloads: watched folders. The "add" icon is positioned with a
+   170px inline padding-left, which only works with content-box sizing. */
+#watched_folders_tab {
+    border: 1px solid var(--color-border-default) !important;
+    border-collapse: collapse;
+}
+
+.select-watched-folder-editable img {
+    box-sizing: content-box;
+    position: relative;
+    top: 3px;
+}
+
+#watched_folders_tab td:last-child {
+    padding-right: 34px;
+}
+
+/* Options > RSS: the full-width button clipped its own label */
+fieldset.settings > button {
+    max-width: 320px;
+}
+
+/* Statistics window headings */
+#statisticsContent h3 {
+    color: var(--color-text-default);
+    margin-bottom: 1px;
+    padding: 2px;
+}
+
+/* Confirmation dialogs: message block centred vertically above the buttons */
+.modalDialog .mochaContent.pad > :first-child {
+    margin: auto 0;
+}
+
+/* Dialog pages (iframes) keep upstream's window sizes, so their controls use a
+   tighter scale than the main window. :where() keeps these at element-level
+   specificity; otherwise the #desktop inside :has() outranks id/class rules such
+   as #torrentFilesFilterInput and .combo_priority. */
+:where(body:not(:has(#desktop))) :is(input[type="button"], input[type="submit"], button) {
+    height: 28px;
+    line-height: 26px;
+}
+
+:where(body:not(:has(#desktop))) :is(input[type="text"], input[type="number"], input[type="password"]) {
+    padding: 4px 8px;
+}
+
+:where(body:not(:has(#desktop))) select {
+    height: 28px;
+    line-height: 26px;
+}
+
+/* Narrow windows: keep the filter box reachable on its own toolbar row */
+@media (width <= 720px) {
+    #torrentsFilterToolbar {
+        flex: 1 1 100%;
+        height: 32px;
+        margin-left: 0;
+    }
+
+    #torrentsFilterInput {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+}
+
+@media (width <= 480px) {
+    #torrentsFilterToolbar label[for="torrentsFilterSelect"] {
+        display: none;
+    }
+}

@@ -1,0 +1,18 @@
+# Build outputs
+build/
+dist/
+webui/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS & editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
