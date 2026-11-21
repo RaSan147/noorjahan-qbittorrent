@@ -4,7 +4,7 @@
 
 **A calmer, evenly spaced Light & Dark theme for qBittorrent — with a matching Web UI.**
 
-[![Version](https://img.shields.io/badge/version-1.2.3-1D786B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.2.4-1D786B?style=flat-square)](CHANGELOG.md)
 [![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3%20%C2%B7%20Web%20UI%205.2.3%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%C2%B7%20Linux%20Web%20UI-55514C?style=flat-square)](#compatibility)
 [![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
@@ -53,7 +53,13 @@ Noorjahan replaces qBittorrent's default chrome with warm stone surfaces, a sing
 
 All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, and `Noorjahan-WebUI.zip`) are free to download from the website:
 
-**[→ Download Noorjahan v1.2.3](https://noorjahan.hamim2964.workers.dev/#download)**
+**[→ Download Noorjahan v1.2.4](https://noorjahan.hamim2964.workers.dev/#download)**
+
+They are also attached to every [GitHub release](https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest) with a `SHA256SUMS.txt`, always under the same names, so the newest file is always at:
+
+```
+https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/<file name>
+```
 
 ### Windows — Quick Setup
 1. Download `Noorjahan-Setup.zip` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and extract it.
@@ -68,6 +74,27 @@ All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorja
 1. Download and extract `Noorjahan-WebUI.zip` from [the website](https://noorjahan.hamim2964.workers.dev/#download).
 2. Open **Tools › Options › Web UI**, enable **Use alternative WebUI**, and select the `Noorjahan-WebUI` folder.
 3. Hard-refresh the Web UI in your browser (`Ctrl+F5`).
+
+### Web UI — Updates
+From 1.2.4 the Web UI checks GitHub once a day and shows a small notice when a newer release is out. It never installs anything by itself, because qBittorrent can't let a web page write to its own folder. To turn the check off, click **Stop checking** in the notice or use **Help › Noorjahan update check**. The check is a plain request to `api.github.com`, so GitHub sees your IP address. No cookies or referrer are sent, and the setting stays in your browser.
+
+To install an update, run the updater script. It finds your `Noorjahan-WebUI` folder from qBittorrent's settings, checks the download's SHA-256, keeps the old folder as a backup, and swaps in the new one. Then reload the page; qBittorrent does not need a restart.
+
+**Windows (PowerShell):**
+```powershell
+irm https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/update-webui.ps1 -OutFile update-webui.ps1
+powershell -ExecutionPolicy Bypass -File .\update-webui.ps1
+```
+
+**Linux / Raspberry Pi** (run as the user that owns the folder):
+```bash
+curl -fsSLO https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/update-webui.sh
+bash update-webui.sh
+```
+
+Options: `-Path` / `--path` to name the folder yourself, `-Check` / `--check` to only look, `-Yes` / `--yes` to skip the question, `-KeepBackups` / `--keep-backups` (default 3).
+
+The desktop `.qbtheme` can't be swapped while qBittorrent runs, so it has no in-app notice; download the new file and restart qBittorrent.
 
 > [!TIP]
 > In **Behavior › Transfer List**, enable **Make progress bars follow text colors** so each progress bar matches its torrent's state colour (blue while downloading, green while seeding).

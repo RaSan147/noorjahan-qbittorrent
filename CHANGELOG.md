@@ -3,6 +3,12 @@
 All notable changes to Noorjahan for qBittorrent are documented here.
 Download the latest release at [noorjahan.hamim2964.workers.dev](https://noorjahan.hamim2964.workers.dev/#download).
 
+## 1.2.4
+Web UI only; the desktop themes and the setup zip are the same as 1.2.3. Thanks to @schweppes-0x for the idea ([#2](https://github.com/chiefhamim/noorjahan-qbittorrent/issues/2)).
+- **Update notice in the Web UI.** Once a day it asks GitHub for the newest release and, if there is a newer one, shows a small notice with a link to what changed. Dismiss it per version, turn it off with **Stop checking**, or use **Help › Check for Noorjahan update** / **Help › Noorjahan update check**. It only reads the public release info and sends no cookies or referrer; GitHub does see your IP address.
+- **Release files on GitHub.** Every release now carries `Noorjahan-WebUI.zip`, `Noorjahan-Setup.zip`, both `.qbtheme` files, the updater scripts and `SHA256SUMS.txt`, under the same names each time. The newest is always at `https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/<file>`.
+- **Updater scripts** (`tools/update-webui.ps1` for Windows, `tools/update-webui.sh` for Linux and Raspberry Pi). They find the Web UI folder from qBittorrent's settings, check the download's SHA-256, keep the old folder as a backup and swap in the new one. Reload the page afterwards; qBittorrent does not need a restart.
+
 ## 1.2.3
 - Fixed clipped button text on both sides of **Remove torrent and content** (and other long primary dialog buttons) when a button becomes the active default (`QPushButton:default` now keeps the same font weight as `QPushButton` so glyphs match Qt's layout `sizeHint`).
 
