@@ -3,6 +3,11 @@
 All notable changes to Noorjahan for qBittorrent are documented here.
 Download the latest release at [noorjahan.hamim2964.workers.dev](https://noorjahan.hamim2964.workers.dev/#download).
 
+## 1.2.2
+- Fixed clipped warning icons in the **Remove torrent(s)** dialog and **RSS Downloader** (Must Contain, Must Not Contain, and Episode Filter validation icons).
+- Fixed clipped `<` and `>` tab-bar scroll buttons in **About qBittorrent** (and other overflowing tab bars), replacing them with clean themed chevrons inside framed buttons.
+- Increased status-bar label height to `16 px` so the restart-required warning icon renders without vertical clipping.
+
 ## 1.2.1
 - Fixed menu bar rendering without the Inter font (Windows 10 and Windows 11 without Inter).
 - Added `Noorjahan-Setup.zip` one-click installer for both themes and the Inter font (no admin required).

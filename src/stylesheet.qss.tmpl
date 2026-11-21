@@ -615,13 +615,40 @@ QTabBar::close-button:hover {
 }
 
 QTabBar::scroller {
-    width: 22px;
+    width: 48px;
 }
 
 QTabBar QToolButton {
     background-color: $card;
-    border: none;
+    border: 1px solid $line;
     border-radius: 6px;
+    padding: 0;
+    margin: 4px 1px;
+}
+
+QTabBar QToolButton:hover {
+    background-color: $hover;
+    border-color: $lineStrong;
+}
+
+QTabBar QToolButton::left-arrow {
+    image: url(":/uitheme/ui/chevron-left.svg");
+    width: 14px;
+    height: 14px;
+}
+
+QTabBar QToolButton::left-arrow:disabled {
+    image: url(":/uitheme/ui/chevron-left-disabled.svg");
+}
+
+QTabBar QToolButton::right-arrow {
+    image: url(":/uitheme/ui/chevron-right.svg");
+    width: 14px;
+    height: 14px;
+}
+
+QTabBar QToolButton::right-arrow:disabled {
+    image: url(":/uitheme/ui/chevron-right-disabled.svg");
 }
 
 /* --------------------------------------------------------------- splitters */
@@ -1088,17 +1115,18 @@ QStatusBar::item {
     border: none;
 }
 
-/* text items (free space, external IP, DHT nodes): the same 4px lift as the
-   buttons, and 12px each side (= a button's 10px border + 2px margin) */
+/* text items (free space, external IP, DHT nodes) and restart warning icon:
+   16px height fits 16x16 pixmaps without clipping while keeping the 30px box
+   and 4px vertical lift (3 + 16 + 11 = 30) */
 QStatusBar QLabel {
     color: $text2;
     background: transparent;
     border-style: solid;
     border-color: transparent;
-    border-width: 4px 8px 12px 0;
+    border-width: 3px 8px 11px 0;
     padding: 0 12px;
-    min-height: 14px;
-    max-height: 14px;
+    min-height: 16px;
+    max-height: 16px;
 }
 
 /* items only as wide as their text (qBittorrent reserves 200px per speed).
@@ -1600,6 +1628,17 @@ QDialog QGroupBox QGroupBox#groupStoreSearchJobs::title {
 
 QDialog QLabel {
     margin-right: 6px;
+}
+
+/* Fixed-size icon QLabels inside dialogs must not lose width to QDialog QLabel's
+   right margin (which otherwise slices 4-6px off their right edge). */
+DeletionConfirmationDialog #labelWarning,
+AutomatedRssDownloader #labelMustStat,
+AutomatedRssDownloader #labelMustNotStat,
+AutomatedRssDownloader #labelEpFilterStat,
+AutomatedRssDownloader #lblEFilterStat,
+ShutdownConfirmDialog #warningLabel {
+    margin-right: 0;
 }
 
 /* ---------------------------------------------------------------- slider */

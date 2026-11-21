@@ -4,7 +4,7 @@
 
 **A calmer, evenly spaced Light & Dark theme for qBittorrent — with a matching Web UI.**
 
-[![Version](https://img.shields.io/badge/version-1.2.1-1D786B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.2.2-1D786B?style=flat-square)](CHANGELOG.md)
 [![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3%20%C2%B7%20Web%20UI%205.2.3%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%C2%B7%20Linux%20Web%20UI-55514C?style=flat-square)](#compatibility)
 [![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
@@ -53,7 +53,7 @@ Noorjahan replaces qBittorrent's default chrome with warm stone surfaces, a sing
 
 All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, and `Noorjahan-WebUI.zip`) are free to download from the website:
 
-**[→ Download Noorjahan v1.2.1](https://noorjahan.hamim2964.workers.dev/#download)**
+**[→ Download Noorjahan v1.2.2](https://noorjahan.hamim2964.workers.dev/#download)**
 
 ### Windows — Quick Setup
 1. Download `Noorjahan-Setup.zip` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and extract it.
