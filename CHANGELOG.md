@@ -3,6 +3,9 @@
 All notable changes to Noorjahan for qBittorrent are documented here.
 Download the latest release at [noorjahan.hamim2964.workers.dev](https://noorjahan.hamim2964.workers.dev/#download).
 
+## 1.2.3
+- Fixed clipped button text on both sides of **Remove torrent and content** (and other long primary dialog buttons) when a button becomes the active default (`QPushButton:default` now keeps the same font weight as `QPushButton` so glyphs match Qt's layout `sizeHint`).
+
 ## 1.2.2
 - Fixed clipped warning icons in the **Remove torrent(s)** dialog and **RSS Downloader** (Must Contain, Must Not Contain, and Episode Filter validation icons).
 - Fixed clipped `<` and `>` tab-bar scroll buttons in **About qBittorrent** (and other overflowing tab bars), replacing them with clean themed chevrons inside framed buttons.

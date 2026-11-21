@@ -1205,11 +1205,13 @@ QPushButton:checked {
     border-color: $accentLine;
 }
 
+/* Keep the same font-weight as base QPushButton: Qt computes a button's
+   sizeHint from the non-default rule, so bumping weight on :default clips
+   longer labels (e.g. "Remove torrent and content") on both sides. */
 QPushButton:default {
     background-color: $prim;
     border-color: $prim;
     color: $onPrim;
-    font-weight: 600;
 }
 
 QPushButton:default:hover {
