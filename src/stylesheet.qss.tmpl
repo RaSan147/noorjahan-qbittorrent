@@ -17,7 +17,8 @@
    ========================================================================== */
 
 * {
-    font-family: "Inter", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+    /*font-family: "Inter", "Segoe UI", "Segoe UI Variable Text", sans-serif;*/
+    font-family: "IBM Plex Sans", "Segoe UI", sans-serif; /* Looks better and crisp */
     font-size: 10pt;
     font-weight: $bodyWeight;  /* Medium in both: Qt hints Inter Regular to thin 1px stems; Medium reads like the browser renders Regular */
     outline: none;
@@ -1209,7 +1210,7 @@ QPushButton:default {
     background-color: $prim;
     border-color: $prim;
     color: $onPrim;
-    font-weight: 600;
+    /* font-weight: 400; */ /* on bold/increased weight, text gets clipped */
 }
 
 QPushButton:default:hover {
