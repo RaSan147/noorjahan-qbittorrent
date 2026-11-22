@@ -1,6 +1,6 @@
 <div align="center">
 
-# Noorjahan
+<a href="https://noorjahan.hamim2964.workers.dev/"><img src=".github/assets/banner.png" alt="Noorjahan, a theme for qBittorrent by chiefhamim" width="100%"></a>
 
 **A calmer, evenly spaced Light & Dark theme for qBittorrent, in Regular and Compact sizes, with a matching Web UI.**
 
