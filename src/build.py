@@ -235,6 +235,12 @@ COMPACT_FIX = {
     "AutomatedRssDownloader": {"min-height": "680px"},
     # Statistics: the cards shrink less than the 548px floor, so it scrolled
     "StatsDialog": {"min-height": "600px"},
+    # 1.3.1: the menu bar is capped at 34px, which leaves room for a 24px item slot.
+    # With Inter the slot is 21 + 3 margin = 24, so without Inter (Segoe UI is
+    # 1px taller) it overflowed and Qt folded EVERY menu into the hidden overflow,
+    # leaving an empty bar. Dropping the margin gives 2-3px of slack at 100-150%;
+    # the bar, the items and the toolbar stay pixel-identical with Inter.
+    "QMenuBar::item": {"margin": "0"},
     # Options: rows on a 34px pitch (regular 40); controls keep their 18/20px
     # content box, only the padding around it shrinks
     "OptionsDialog #tabOption QScrollArea QComboBox, OptionsDialog #tabOption QScrollArea QLineEdit, "

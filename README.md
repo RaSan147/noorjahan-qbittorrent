@@ -4,7 +4,7 @@
 
 **A calmer, evenly spaced Light & Dark theme for qBittorrent, in Regular and Compact sizes, with a matching Web UI.**
 
-[![Version](https://img.shields.io/badge/version-1.3.0-1D786B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.3.1-1D786B?style=flat-square)](CHANGELOG.md)
 [![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3%20%C2%B7%20Web%20UI%205.2.3%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%C2%B7%20Linux%20Web%20UI-55514C?style=flat-square)](#compatibility)
 [![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
@@ -54,7 +54,7 @@ Noorjahan replaces qBittorrent's default chrome with warm stone surfaces, a sing
 
 All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, `Noorjahan-Light-Compact.qbtheme`, `Noorjahan-Dark-Compact.qbtheme`, and `Noorjahan-WebUI.zip`) are free to download from the website:
 
-**[→ Download Noorjahan v1.3.0](https://noorjahan.hamim2964.workers.dev/#download)**
+**[→ Download Noorjahan v1.3.1](https://noorjahan.hamim2964.workers.dev/#download)**
 
 They are also attached to every [GitHub release](https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest) with a `SHA256SUMS.txt`, always under the same names, so the newest file is always at:
 

@@ -3,6 +3,10 @@
 All notable changes to Noorjahan for qBittorrent are documented here.
 Download the latest release at [noorjahan.hamim2964.workers.dev](https://noorjahan.hamim2964.workers.dev/#download).
 
+## 1.3.1
+- **Fixed an empty menu bar in the Compact themes on PCs without the Inter font** (the theme installed by hand rather than with `Noorjahan-Setup.zip`). Segoe UI made the menu items 1 px taller than the Compact bar allows, so Qt folded the whole File…Help row into its hidden overflow. The items now have room to spare at 100–150 % scaling, with or without Inter; with Inter the bar looks exactly as before, and an opened menu sits about 3 px closer to its button.
+- The regular themes are unchanged. Web UI: version stamp only (`1.3.1`).
+
 ## 1.3.0
 - **New: Compact versions of both themes.** `Noorjahan Light Compact` and `Noorjahan Dark Compact` keep every colour, icon, card, radius and hover state of the regular themes and shrink the rest: text `10 pt` → `9 pt`, spacing and control heights to about 80 %, transfer rows from `42 px` to `35 px`, sidebar rows to `28 px`. The regular themes are unchanged, byte for byte.
 - **The whole app follows.** Options, Advanced settings, RSS and the RSS Downloader, Statistics, About, context menus and the toolbar (Lock button included) were checked one by one in Compact, with fixes where tighter sizes moved things: scrollbars stay below their column headers, Advanced rows stay at `36 px`, the RSS Downloader and Statistics still fit without scrolling, and About shows all six tabs.
