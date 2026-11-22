@@ -69,10 +69,10 @@ if (Test-Inter) {
 
 # 2. Themes -------------------------------------------------------------------
 New-Item -ItemType Directory -Force $themeDir | Out-Null
-foreach ($t in 'Noorjahan Light.qbtheme', 'Noorjahan Dark.qbtheme') {
+foreach ($t in 'Noorjahan Light.qbtheme', 'Noorjahan Dark.qbtheme', 'Noorjahan Light Compact.qbtheme', 'Noorjahan Dark Compact.qbtheme') {
     Copy-Item (Join-Path $here $t) (Join-Path $themeDir $t) -Force
 }
-Say "  [ok] Copied both themes to $themeDir" 'Green'
+Say "  [ok] Copied all four themes (Light, Dark and their Compact versions) to $themeDir" 'Green'
 Say ''
 
 # 3. Switch it on (only when qBittorrent is closed) ----------------------------
@@ -110,8 +110,8 @@ if ($running) {
     Say "    $themeDir"
     Say "    and set Style to $style."
 } else {
-    $ans = if ($env:NJ_TEST_ANSWER) { $env:NJ_TEST_ANSWER } else { Read-Host '  Turn it on now? [L] Light  [D] Dark  [N] No, I will do it myself' }
-    $pick = switch -Regex ($ans) { '^[lL]' { 'Light' } '^[dD]' { 'Dark' } default { $null } }
+    $ans = if ($env:NJ_TEST_ANSWER) { $env:NJ_TEST_ANSWER } else { Read-Host '  Turn it on now? [L] Light  [D] Dark  [LC] Light Compact  [DC] Dark Compact  [N] No, I will do it myself' }
+    $pick = if ($ans -match '^\s*[lL]\s*[cC]') { 'Light Compact' } elseif ($ans -match '^\s*[dD]\s*[cC]') { 'Dark Compact' } elseif ($ans -match '^\s*[lL]') { 'Light' } elseif ($ans -match '^\s*[dD]') { 'Dark' } else { $null }
     if ($pick) {
         $bak = "$ini.before-noorjahan-" + (Get-Date -Format 'yyyyMMdd-HHmmss') + '.bak'
         Copy-Item $ini $bak

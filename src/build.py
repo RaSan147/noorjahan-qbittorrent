@@ -191,8 +191,144 @@ PILL_ICONS = [
 ]
 
 
-def build(t, rcc):
-    name = t["variant"].lower()
+# ---- Compact: the whole stylesheet scaled down proportionally ---------------
+# Every px size x0.8 (gaps, corners, padding, margins, heights, widths), text
+# x0.9 (10pt -> 9pt), icon sizes x0.9 rounded to even pixels so they stay sharp.
+# Rules that only cancel Qt's own fixed layout insets (which never scale) are
+# left alone.
+SCALE, FONT_SCALE, ICON_SCALE = 0.8, 0.9, 0.9
+UNSCALED = {
+    "MainWindow #centralWidget > QTabWidget::pane",
+    "#centralWidget > QTabWidget > QStackedWidget > QSplitter",
+    "OptionsDialog #tabOption QScrollArea",
+    "OptionsDialog AdvancedSettings",
+}
+# Control geometry is NOT scaled: min/max sizes (field, button and status-item
+# heights are measured against the text), and sub-controls (spin arrows,
+# checkbox boxes, drop-downs, scroll/slider handles, chevrons) keep their
+# regular size. Only spacing scales.
+KEEP_PROPS = {"min-width", "max-width"}   # min/max-height: kept up to 24px (text boxes), larger ones scale
+KEEP_SUBCONTROLS = ("::indicator", "::up-button", "::down-button", "::up-arrow", "::down-arrow",
+                    "::drop-down", "::menu-button", "::menu-arrow", "::menu-indicator", "::right-arrow",
+                    "::left-arrow", "::close-button", "::handle", "::groove", "::sub-page", "::add-line",
+                    "::sub-line", "::scroller", "::branch", "::icon")
+# toolbar filter box / combo: same height as the (icon-driven) toolbar pills
+COMPACT_FIX = {
+    "QToolBar QLineEdit": {"min-height": "28px", "max-height": "28px"},
+    "QToolBar QComboBox": {"min-height": "28px", "max-height": "28px"},
+    # Options page list: the pill is the item box (fixed by qBittorrent, not by
+    # QSS) minus these margins, so they can't scale: 27px pill centred on the
+    # label, 5px between pills (regular: 34px / 6px)
+    "OptionsDialog #tabSelection::item": {"margin": "10px 0 26px 0"},
+    # scroll bars parked under a list header: the header shrinks by its scaled
+    # margins only (text height doesn't), so offset = regular - that - 1 (gap 5 -> 4).
+    # Transfer list measured: header rule 4px higher, bar 32 -> 4px under the rule.
+    "MainWindow QSplitter TransferListWidget QScrollBar:vertical": {"margin": "32px 0 0 0"},
+    "PropertiesWidget QTreeView QScrollBar:vertical": {"margin": "33px 2px 4px 0"},
+    "RSSWidget #feedListWidget QScrollBar:vertical": {"margin": "30px 0 0 0"},
+    # RSS page: the feed card's top meets the two article cards (under the caption)
+    "RSSWidget #feedListWidget": {"margin-top": "25px"},
+    # RSS Downloader: the three cards start level, the right caption centred on
+    # the left toolbar row; the window floor keeps "Torrent parameters" in view
+    "AutomatedRssDownloader #ruleScrollArea": {"margin-top": "37px"},
+    "AutomatedRssDownloader #matchingArticlesLabel": {"min-height": "31px", "max-height": "31px"},
+    "AutomatedRssDownloader": {"min-height": "680px"},
+    # Statistics: the cards shrink less than the 548px floor, so it scrolled
+    "StatsDialog": {"min-height": "600px"},
+    # Options: rows on a 34px pitch (regular 40); controls keep their 18/20px
+    # content box, only the padding around it shrinks
+    "OptionsDialog #tabOption QScrollArea QComboBox, OptionsDialog #tabOption QScrollArea QLineEdit, "
+    "OptionsDialog #tabOption QScrollArea QAbstractSpinBox, OptionsDialog #tabOption QScrollArea QPushButton":
+        {"padding-top": "3px", "padding-bottom": "3px"},
+    "OptionsDialog #tabOption QScrollArea QCheckBox, OptionsDialog #tabOption QScrollArea QRadioButton":
+        {"padding-top": "3px", "padding-bottom": "3px"},
+    # Language label is held to the width of "Color scheme:" so the three combos
+    # share one edge; at 9pt that label is 8px narrower
+    "OptionsDialog #labelLanguage": {"min-width": "89px"},
+    # Advanced: the row height is the hidden header's section size (44 -> 36);
+    # Qt puts editors 4px below the row line: 4 + 2 + 24px field + 6 = 36
+    "AdvancedSettings QHeaderView": {"qproperty-defaultSectionSize": "36", "qproperty-minimumSectionSize": "36"},
+    "AdvancedSettings QAbstractSpinBox, AdvancedSettings QComboBox, AdvancedSettings QLineEdit":
+        {"margin": "2px 0 6px 0", "min-height": "20px", "max-height": "20px"},
+    # context-menu checkbox rows (TriStateWidget) match the 30px icon rows
+    "TriStateWidget": {"min-height": "30px"},
+    # RSS Downloader: "Ignore Subsequent Matches" box ends on the fields' edge
+    "AutomatedRssDownloader #spinIgnorePeriod, AutomatedRssDownloader #lblLastMatch": {"margin-right": "12px"},
+}
+
+
+# rules only the compact bundles get
+COMPACT_EXTRA = """
+/* About: the dialog sizes itself to its (now smaller) content, which left the
+   tab strip cutting "Software Used" in half under its scroll arrow; wide enough
+   for all six tabs */
+AboutDialog {
+    min-width: 600px;
+}
+"""
+
+
+def sc(v):
+    """scale one px length; hairlines stay 1px, zero stays zero"""
+    if v == 0:
+        return 0
+    r = int(abs(v) * SCALE + 0.5) or 1
+    return r if v > 0 else -r
+
+
+def scale_qss(qss):
+    qss = re.sub(r"/\*.*?\*/", "", qss, flags=re.S)
+
+    def decl(m, keep_all=False, scrollbar=False):
+        prop, val = m.group(1), m.group(2)
+        p = prop.strip().lower()
+        if scrollbar:
+            # scroll bars keep their regular thickness and insets (a narrower
+            # handle can't hold its 4px radius: Qt then draws square tips); only
+            # the big offsets that park a bar under a list header follow the
+            # (smaller) header
+            if p != "margin":
+                return m.group(0)
+            return prop + ":" + re.sub(r"(-?\d+)px", lambda n: f"{sc(int(n.group(1))) if abs(int(n.group(1))) > 24 else int(n.group(1))}px", val)
+        if keep_all or p in KEEP_PROPS or p == "spacing" and val.strip().startswith("-"):
+            return m.group(0)
+        if p in ("min-height", "max-height") and all(int(float(x)) <= 24 for x in re.findall(r"([\d.]+)px", val)):
+            return m.group(0)
+        if p == "font-size":
+            return prop + ":" + re.sub(r"([\d.]+)pt", lambda n: f"{round(float(n.group(1)) * FONT_SCALE * 2) / 2:g}pt", val)
+        if p == "qproperty-iconsize":
+            return prop + ":" + re.sub(r"(\d+)px", lambda n: f"{max(2, round(int(n.group(1)) * ICON_SCALE / 2) * 2)}px", val)
+        if p == "qproperty-handlewidth":
+            return prop + ":" + re.sub(r"\d+", lambda n: str(sc(int(n.group(0)))), val)
+        if p == "border-image":   # 9-slice numbers after url(); the images are scaled to match
+            head, tail = val.split(")", 1)
+            return prop + ":" + head + ")" + re.sub(r"\b\d+\b", lambda n: str(sc(int(n.group(0)))), tail)
+        return prop + ":" + re.sub(r"(-?\d+(?:\.\d+)?)px", lambda n: f"{sc(float(n.group(1)))}px", val)
+
+    def rule(m):
+        sel, body = m.group(1), m.group(2)
+        if " ".join(sel.split()) in UNSCALED:
+            return m.group(0)
+        keep = any(c in sel for c in KEEP_SUBCONTROLS)
+        bar = "QScrollBar" in sel
+        body = re.sub(r"([A-Za-z-]+)\s*:([^;{}]*)", lambda m: decl(m, keep, bar), body)
+        for prop, val in COMPACT_FIX.get(" ".join(sel.split()), {}).items():
+            body, n = re.subn(rf"(?<![\w-]){prop}\s*:[^;]*", f"{prop}: {val}", body)
+            if n:
+                applied.add((" ".join(sel.split()), prop))
+        return sel + "{" + body + "}"
+
+    applied = set()
+    out = re.sub(r"([^{}]+)\{([^{}]*)\}", rule, qss)
+    missing = {(sl, pr) for sl, props in COMPACT_FIX.items() for pr in props} - applied
+    assert not missing, f"COMPACT_FIX matched nothing: {missing}"
+    return out + COMPACT_EXTRA
+
+
+def build(t, rcc, compact=False):
+    if compact:
+        t = dict(t, variant=t["variant"] + " Compact")
+    name = t["variant"].lower().replace(" ", "-")
     out = ROOT / "build" / name
     if out.exists():
         shutil.rmtree(out)
@@ -200,6 +336,8 @@ def build(t, rcc):
     (out / "ui").mkdir()
 
     qss = string.Template((SRC / "stylesheet.qss.tmpl").read_text(encoding="utf-8")).substitute(t)
+    if compact:
+        qss = scale_qss(qss)
     left = re.findall(r"\$[A-Za-z]+", qss)
     if left:
         sys.exit(f"unresolved tokens: {left}")
@@ -227,9 +365,14 @@ def build(t, rcc):
     # status bar footer card, drawn as a 9-slice border image (the status bar
     # ignores margins): 8px clear left/right/below, radius 12 (matching all cards).
     # Slices: top 12, sides 21, bottom 20.
+    # (Compact: every number goes through the same sc() as the QSS slices)
+    k = sc if compact else (lambda v: v)
+    clear, side, top, bottom = k(8), k(21), k(12), k(20)
+    cw, ch = 2 * side + 6, top + bottom + clear
     (out / "ui" / "statusbar-card.svg").write_text(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40">'
-        f'<rect x="8.5" y="0.5" width="31" height="31" rx="12" fill="{t['card']}" stroke="{t['line']}"/></svg>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{cw}" height="{ch}" viewBox="0 0 {cw} {ch}">'
+        f'<rect x="{clear + .5:g}" y="0.5" width="{cw - 2 * clear - 1}" height="{ch - clear - 1}" rx="{k(12)}" '
+        f'fill="{t['card']}" stroke="{t['line']}"/></svg>',
         encoding="utf-8")
     # status bar item hover / pressed pill, drawn as a border image the exact
     # height of the item (30 = 4 + 14 text + 12) so nothing is stretched
@@ -243,11 +386,12 @@ def build(t, rcc):
             r, g, b, a = [int(v) for v in c[5:-1].split(",")]
             return f"#{r:02X}{g:02X}{b:02X}", f"{a / 255:.3f}"
         return c, "1"
+    hw, hh = k(10) + k(24) + 20, k(4) + 14 + k(12)
     for state, (fill, line) in {"hover": ("field", "line"), "press": ("accentSoft", "accentLine")}.items():
         f, fo = paint(t[fill]); l, lo = paint(t[line])
         (out / "ui" / f"status-{state}.svg").write_text(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="54" height="30" viewBox="0 0 54 30">'
-            f'<rect x="0.5" y="0.5" width="39" height="21" rx="7" fill="{f}" fill-opacity="{fo}" '
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{hw}" height="{hh}" viewBox="0 0 {hw} {hh}">'
+            f'<rect x="0.5" y="0.5" width="{hw - k(14) - 1}" height="{hh - k(8) - 1}" rx="{k(7)}" fill="{f}" fill-opacity="{fo}" '
             f'stroke="{l}" stroke-opacity="{lo}"/></svg>', encoding="utf-8")
 
     files = sorted(p.relative_to(out).as_posix() for p in out.rglob("*") if p.is_file())
@@ -319,4 +463,6 @@ if __name__ == "__main__":
     rcc = sys.argv[1] if len(sys.argv) > 1 else "rcc"
     for theme in (LIGHT, DARK):
         build(theme, rcc)
+    for theme in (LIGHT, DARK):
+        build(theme, rcc, compact=True)
     webui_icons()

@@ -3,12 +3,14 @@ Noorjahan for qBittorrent
 
 Easiest: double-click "Install Noorjahan.cmd".
   - Installs the Inter font for your Windows user (no admin needed).
-  - Copies both themes to %APPDATA%\qBittorrent\themes.
+  - Copies all four themes to %APPDATA%\qBittorrent\themes:
+    Light, Dark, and their Compact versions (tighter rows, 9 pt text).
   - If qBittorrent is closed, it offers to switch the theme on for you
     (your qBittorrent.ini is backed up first).
 
 By hand:
-  1. Copy "Noorjahan Light.qbtheme" or "Noorjahan Dark.qbtheme" somewhere it can stay.
+  1. Copy one of the four .qbtheme files somewhere it can stay
+     (Light, Dark, Light Compact or Dark Compact).
   2. qBittorrent > Tools > Options > Behavior: tick "Use custom UI theme" and choose the file.
   3. On the same page, set Style to windows11 (Windows 10: windowsvista). Restart qBittorrent.
   4. Optional: open fonts\Inter.ttf and click Install.

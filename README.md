@@ -2,9 +2,9 @@
 
 # Noorjahan
 
-**A calmer, evenly spaced Light & Dark theme for qBittorrent — with a matching Web UI.**
+**A calmer, evenly spaced Light & Dark theme for qBittorrent, in Regular and Compact sizes, with a matching Web UI.**
 
-[![Version](https://img.shields.io/badge/version-1.2.5-1D786B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.3.0-1D786B?style=flat-square)](CHANGELOG.md)
 [![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3%20%C2%B7%20Web%20UI%205.2.3%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%C2%B7%20Linux%20Web%20UI-55514C?style=flat-square)](#compatibility)
 [![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
@@ -40,6 +40,7 @@ Noorjahan replaces qBittorrent's default chrome with warm stone surfaces, a sing
 - **88 outline icons** — recoloured Fluent UI System Icons (plus Lucide magnet icons) across the toolbar, menus, dialogs, and all 14 torrent states.
 - **Semantic state colour** — blue for downloading, green for seeding, amber for waiting, red for errors; neutral surfaces everywhere else.
 - **Readable progress & controls** — slim underline progress bars that can match row state colours, pill-style detail tabs, and a rocket/turtle speed-limit toggle.
+- **Regular or Compact** — the Compact themes keep the same colours, icons, cards and radii, with 35 px rows, 9 pt text and tighter controls so more torrents fit on screen.
 - **Consistent across surfaces** — covers the main window, Options, Add Torrent, Torrent Creator, and a matching Light/Dark Web UI that follows your system theme.
 
 ## Compatibility
@@ -51,9 +52,9 @@ Noorjahan replaces qBittorrent's default chrome with warm stone surfaces, a sing
 
 ## Download & Setup
 
-All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, and `Noorjahan-WebUI.zip`) are free to download from the website:
+All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, `Noorjahan-Light-Compact.qbtheme`, `Noorjahan-Dark-Compact.qbtheme`, and `Noorjahan-WebUI.zip`) are free to download from the website:
 
-**[→ Download Noorjahan v1.2.5](https://noorjahan.hamim2964.workers.dev/#download)**
+**[→ Download Noorjahan v1.3.0](https://noorjahan.hamim2964.workers.dev/#download)**
 
 They are also attached to every [GitHub release](https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest) with a `SHA256SUMS.txt`, always under the same names, so the newest file is always at:
 
@@ -63,10 +64,10 @@ https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/<fi
 
 ### Windows — Quick Setup
 1. Download `Noorjahan-Setup.zip` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and extract it.
-2. Run **`Install Noorjahan.cmd`** — installs both themes and the [Inter](https://rsms.me/inter/) font for your user (no admin needed), backs up `qBittorrent.ini`, and can switch the theme on automatically.
+2. Run **`Install Noorjahan.cmd`** — installs all four themes (Light, Dark and their Compact versions) and the [Inter](https://rsms.me/inter/) font for your user (no admin needed), backs up `qBittorrent.ini`, and can switch the theme on automatically.
 
 ### Windows — Manual Setup
-1. Download `Noorjahan-Light.qbtheme` or `Noorjahan-Dark.qbtheme` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and save it in a permanent folder (e.g. `%APPDATA%\qBittorrent\themes`).
+1. Download one of `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, `Noorjahan-Light-Compact.qbtheme` or `Noorjahan-Dark-Compact.qbtheme` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and save it in a permanent folder (e.g. `%APPDATA%\qBittorrent\themes`).
 2. Open **Tools › Options › Behavior**, enable **Use custom UI theme**, and select the `.qbtheme` file.
 3. On the same page, set **Style** to **`windows11`** (or **`windowsvista`** on Windows 10), then restart qBittorrent.
 
@@ -107,7 +108,7 @@ This repository contains the theme source (`src/`), Windows installer scripts (`
 python src/build.py <path-to-rcc.exe>
 ```
 
-This writes `build/light`, `build/dark`, and `dist/Noorjahan Light.qbtheme` / `dist/Noorjahan Dark.qbtheme`. See [CHANGELOG.md](CHANGELOG.md) for the release history.
+This writes `build/light`, `build/dark`, `build/light-compact`, `build/dark-compact` and the four bundles in `dist/` (`Noorjahan Light`, `Noorjahan Dark`, `Noorjahan Light Compact`, `Noorjahan Dark Compact`). See [CHANGELOG.md](CHANGELOG.md) for the release history.
 
 ## Credits & License
 

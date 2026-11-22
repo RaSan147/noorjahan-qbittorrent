@@ -3,6 +3,13 @@
 All notable changes to Noorjahan for qBittorrent are documented here.
 Download the latest release at [noorjahan.hamim2964.workers.dev](https://noorjahan.hamim2964.workers.dev/#download).
 
+## 1.3.0
+- **New: Compact versions of both themes.** `Noorjahan Light Compact` and `Noorjahan Dark Compact` keep every colour, icon, card, radius and hover state of the regular themes and shrink the rest: text `10 pt` → `9 pt`, spacing and control heights to about 80 %, transfer rows from `42 px` to `35 px`, sidebar rows to `28 px`. The regular themes are unchanged, byte for byte.
+- **The whole app follows.** Options, Advanced settings, RSS and the RSS Downloader, Statistics, About, context menus and the toolbar (Lock button included) were checked one by one in Compact, with fixes where tighter sizes moved things: scrollbars stay below their column headers, Advanced rows stay at `36 px`, the RSS Downloader and Statistics still fit without scrolling, and About shows all six tabs.
+- **Rounded scrollbar ends and tooltips** in Compact, matching the regular themes.
+- **Setup installs all four themes** and offers `[L]` Light, `[D]` Dark, `[LC]` Light Compact or `[DC]` Dark Compact when switching one on.
+- **Web UI:** unchanged apart from the version stamp (`1.3.0`), so the update notice clears after updating.
+
 ## 1.2.5
 - **Unified `12 px` card radius** across the Transfer List, Sidebar, Details panel, Status Bar footer card, RSS cards, RSS Downloader cards, Execution Log, Options, Manage Cookies, and Plugins dialogs.
 - **Maximized status bar hover fix:** Widened the right clearance on status bar pills and dividers so the Upload speed hover pill never overflows the `12 px` card corner when qBittorrent is maximized and Qt hides `QSizeGrip`.
