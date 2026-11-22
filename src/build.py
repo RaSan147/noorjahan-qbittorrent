@@ -33,7 +33,7 @@ LIGHT = dict(
     selStrong="rgba(27, 26, 24, 31)", selSolid="#E9E7E3",
     scroll="rgba(27, 26, 24, 46)", scrollHover="rgba(27, 26, 24, 82)",
     groove="rgba(27, 26, 24, 14)", chunk="#D3CEC7", chunkOff="#E3E0DB",
-    err="#B33A27",
+    err="#B33A27", errSoft="rgba(179, 58, 39, 22)",
     # icon roles
     i_n="#55514C", i_accent="#1D786B", i_dl="#3B6EA5", i_up="#3B8956", i_stall="#B0821A",
     i_check="#6956AC", i_err="#BF412E", i_ok="#3B8956", i_idle="#988F84",
@@ -57,7 +57,7 @@ DARK = dict(
     selStrong="rgba(255, 255, 255, 28)", selSolid="#2A2928",
     scroll="rgba(255, 255, 255, 31)", scrollHover="rgba(255, 255, 255, 56)",
     groove="rgba(255, 255, 255, 12)", chunk="#3A3836", chunkOff="#272624",
-    err="#F27A64",
+    err="#F27A64", errSoft="rgba(242, 122, 100, 28)",
     i_n="#C3BEB6", i_accent="#52C3AF", i_dl="#7AA5DA", i_up="#76C98E", i_stall="#E2B653",
     i_check="#A796F0", i_err="#F0705A", i_ok="#76C98E", i_idle="#938D85",
     i_blue="#7AA5DA", i_violet="#A796F0", i_amber="#E2B653", i_copper="#EB9560",
@@ -184,7 +184,11 @@ def config(t):
     return {"colors": {**palette, **colours}, "colors.dark": dict(colours)}
 
 
-PILL_ICONS = ["help-about", "trackers", "peers", "network-server", "directory", "chart-line"]
+PILL_ICONS = [
+    "help-about", "trackers", "peers", "network-server", "directory", "chart-line",
+    "list-add", "task-complete", "view-refresh", "downloading",
+    "edit-find", "task-reject", "plugins",
+]
 
 
 def build(t, rcc):
@@ -221,17 +225,18 @@ def build(t, rcc):
     for icon, (role, els, size) in UI.items():
         (out / "ui" / f"{icon}.svg").write_text(svg(role_colour(t, role), els, size, t=t), encoding="utf-8")
     # status bar footer card, drawn as a 9-slice border image (the status bar
-    # ignores margins): 8px clear left/right/below, radius 8.
-    # Slices: top 9, sides 17, bottom 20.
+    # ignores margins): 8px clear left/right/below, radius 12 (matching all cards).
+    # Slices: top 12, sides 21, bottom 20.
     (out / "ui" / "statusbar-card.svg").write_text(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">'
-        f'<rect x="8.5" y="0.5" width="23" height="31" rx="8" fill="{t['card']}" stroke="{t['line']}"/></svg>',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40">'
+        f'<rect x="8.5" y="0.5" width="31" height="31" rx="12" fill="{t['card']}" stroke="{t['line']}"/></svg>',
         encoding="utf-8")
     # status bar item hover / pressed pill, drawn as a border image the exact
     # height of the item (30 = 4 + 14 text + 12) so nothing is stretched
     # vertically: a 22px pill on top, the 8px below it clear (that strip lifts
-    # the items onto the card's centre line), and 8px clear on the right (keeps
-    # the last item inside the card)
+    # the items onto the card's centre line), and 14px clear on the right (8px
+    # outside the card + 6px inner clearance so the last pill never overflows
+    # the 12px card corner when maximized and Qt hides QSizeGrip)
     def paint(c):
         c = c.strip()
         if c.startswith("rgba"):
@@ -241,7 +246,7 @@ def build(t, rcc):
     for state, (fill, line) in {"hover": ("field", "line"), "press": ("accentSoft", "accentLine")}.items():
         f, fo = paint(t[fill]); l, lo = paint(t[line])
         (out / "ui" / f"status-{state}.svg").write_text(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="30" viewBox="0 0 48 30">'
+            '<svg xmlns="http://www.w3.org/2000/svg" width="54" height="30" viewBox="0 0 54 30">'
             f'<rect x="0.5" y="0.5" width="39" height="21" rx="7" fill="{f}" fill-opacity="{fo}" '
             f'stroke="{l}" stroke-opacity="{lo}"/></svg>', encoding="utf-8")
 

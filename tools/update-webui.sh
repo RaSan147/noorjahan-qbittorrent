@@ -110,7 +110,12 @@ if [ -z "$path" ]; then
     # qBittorrent 5.x: [WebUI] RootFolder; older: [Preferences] WebUI\RootFolder
     path="$(ini_get "$ini" WebUI RootFolder)"
     [ -n "$path" ] || path="$(ini_get "$ini" Preferences 'WebUI\RootFolder')"
-    [ -n "$path" ] || fail "Couldn't find the Web UI folder in qBittorrent's settings. Run again with --path <your Noorjahan-WebUI folder>."
+    if [ -z "$path" ]; then
+        if [ "$(id -u)" -eq 0 ]; then
+            fail "Couldn't find qBittorrent's settings for root. Under sudo, name the folder: sudo bash $0 --path <your Noorjahan-WebUI folder>"
+        fi
+        fail "Couldn't find the Web UI folder in qBittorrent's settings. Run again with --path <your Noorjahan-WebUI folder>."
+    fi
     say "Web UI folder (from qBittorrent's settings):"
     alt="$(ini_get "$ini" WebUI AlternativeUIEnabled)"
     [ -n "$alt" ] || alt="$(ini_get "$ini" Preferences 'WebUI\AlternativeUIEnabled')"

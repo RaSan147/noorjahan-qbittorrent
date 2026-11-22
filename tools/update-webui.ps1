@@ -54,7 +54,24 @@ try { [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::S
 $ProgressPreference = 'SilentlyContinue'   # makes Invoke-WebRequest much faster on 5.1
 
 function Say([string]$t, [string]$c = 'Gray') { Write-Host $t -ForegroundColor $c }
-function Fail([string]$t) { Say "  [x] $t" 'Red'; Say ''; exit 1 }
+
+# Started by right-click > "Run with PowerShell" or a double-click from Explorer? Then the
+# window closes the moment the script ends, so wait for Enter before closing.
+function Test-OwnWindow {
+    if ($env:NJ_TEST_PAUSE) { return $true }
+    if ([Environment]::CommandLine -match 'Get-ExecutionPolicy') { return $true }   # "Run with PowerShell"
+    try {
+        $me = Get-CimInstance Win32_Process -Filter "ProcessId=$PID" -ErrorAction Stop
+        $parent = Get-Process -Id $me.ParentProcessId -ErrorAction Stop
+        return ($parent.ProcessName -eq 'explorer')
+    }
+    catch { return $false }
+}
+function Exit-Script([int]$code) {
+    if (Test-OwnWindow) { try { [void](Read-Host '  Press Enter to close') } catch { } }
+    exit $code
+}
+function Fail([string]$t) { Say "  [x] $t" 'Red'; Say ''; Exit-Script 1 }
 
 function ConvertTo-Version([string]$tag) {
     $parts = @(($tag -replace '^v', '').Split('.') | ForEach-Object { [int]$_ })
@@ -154,13 +171,13 @@ if (-not $sumAsset) { Fail "Release $tag has no $Sums attached, so the download 
 $newer = (-not $installed) -or ((ConvertTo-Version $tag) -gt (ConvertTo-Version $installed))
 if ($Check) {
     if ($newer) { Say "  An update is available." 'Yellow' } else { Say '  You are up to date.' 'Green' }
-    Say ''; exit 0
+    Say ''; Exit-Script 0
 }
-if (-not $newer -and -not $Force) { Say '  You are up to date. Nothing to do.' 'Green'; Say ''; exit 0 }
+if (-not $newer -and -not $Force) { Say '  You are up to date. Nothing to do.' 'Green'; Say ''; Exit-Script 0 }
 
 if (-not $Yes) {
     $a = Read-Host "  Replace the Web UI with $($tag)? The old folder is kept as a backup. [Y/n]"
-    if ($a -and $a -notmatch '^[yY]') { Say '  Cancelled. Nothing was changed.'; Say ''; exit 0 }
+    if ($a -and $a -notmatch '^[yY]') { Say '  Cancelled. Nothing was changed.'; Say ''; Exit-Script 0 }
 }
 
 # ---------------------------------------------------------------- download + verify
@@ -231,8 +248,10 @@ try {
 }
 catch {
     if ($staged -and (Test-Path -LiteralPath $staged)) { Remove-Item -LiteralPath $staged -Recurse -Force -ErrorAction SilentlyContinue }
+    Remove-Item -LiteralPath $work -Recurse -Force -ErrorAction SilentlyContinue
     Fail $_.Exception.Message
 }
 finally {
     Remove-Item -LiteralPath $work -Recurse -Force -ErrorAction SilentlyContinue
 }
+Exit-Script 0

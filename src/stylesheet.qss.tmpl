@@ -430,7 +430,7 @@ QToolBar QToolButton[text="Open"] {
    right margin at 0 its pill ends on the card edge below, like "File" and the
    first icon start on the left card edge */
 QToolBar QToolButton[text="Lock"] {
-    margin: 6px 8px 6px 9px;
+    margin: 6px 8px 6px 1px;
     padding: 6px 26px 6px 0;  /* 32px tall. Qt centres the padlock between the left padding and the chevron segment, so no left padding and a fixed width centre it */
     min-width: 28px;
     max-width: 28px;
@@ -467,7 +467,7 @@ QToolBar QToolButton {
     border: none;
     border-radius: 10px;
     padding: 6px 8px 5px 9px;  /* 40 x 34 pill, the filter box's height: the 18px icon sits dead centre */
-    margin: 0 1px;
+    margin: 6px 1px;  /* matches QToolBar QComboBox's 6px vertical margin so toolbar height stays locked when switching from Transfers to RSS/Search/Log */
     color: $text;
 }
 
@@ -534,7 +534,7 @@ QToolBar QComboBox {
     border-radius: 10px;
     color: $text;
     padding: 0 14px 0 12px;
-    margin: 6px 0;  /* its list opens 6px below the box */
+    margin: 6px 8px 6px 0;  /* 8px right aligns flush with the card edge below when Lock is hidden; 6px below for dropdown */
     min-width: 60px;
     min-height: 32px;
     max-height: 32px;
@@ -560,7 +560,13 @@ QTabWidget::pane {
 }
 
 QTabWidget::tab-bar {
-    left: 8px;
+    left: 0px;
+}
+
+/* align the main Transfers / Search / RSS / Execution Log tab bar flush with
+   the Status / RSS feeds card below it, without spawning tab scroll arrows */
+MainWindow #centralWidget > QTabWidget > QTabBar {
+    qproperty-usesScrollButtons: false;
 }
 
 /* Search and RSS pages have Qt's own 9px layout inset, which put their cards
@@ -588,7 +594,11 @@ QTabBar::tab {
     border: 1px solid transparent;
     border-radius: 8px;
     padding: 6px 14px;
-    margin: 4px 2px;
+    margin: 4px 4px 4px 0;
+}
+
+MainWindow #centralWidget > QTabWidget > QTabBar::tab:first {
+    margin-left: 0px;
 }
 
 QTabBar::tab:hover {
@@ -779,19 +789,20 @@ MainWindow QSplitter TransferListWidget {
     background-color: $card;
     alternate-background-color: $card;
     border: 1px solid $line;
-    border-radius: 14px;
+    border-radius: 12px;
     margin: 2px 3px 0 0;
     padding: 4px 6px 6px 6px;
     qproperty-iconSize: 16px 16px;
 }
 
-/* scrollbars get their own lane along the card's edge, split from the rows by
-   a hairline; the thumb floats in it with no track */
+/* scrollbars get their own lane along the card's edge; top margin drops the
+   vertical track below the header row so the thumb starts level with the top
+   torrent row and never pokes up into the column header banner */
 MainWindow QSplitter TransferListWidget QScrollBar:vertical {
     background: transparent;
     border: none;
     width: 10px;
-    margin: 0;
+    margin: 36px 0 0 0;
     padding: 4px 1px 4px 1px;
 }
 
@@ -1078,8 +1089,12 @@ PropertiesWidget #labelProgressVal, PropertiesWidget #labelAverageAvailabilityVa
 }
 
 PropertiesWidget SpeedPlotView {
-    background-color: $card;
-    border: none;
+    background-color: $field;
+    border: 1px solid $line2;
+    border-radius: 10px;
+    color: $text3;
+    font-size: 8.5pt;
+    padding: 4px 6px;
 }
 
 /* every list in the details panel uses the transfer list's rows: 42px apart,
@@ -1097,6 +1112,30 @@ PropertiesWidget QListWidget::item {
     border-radius: 9px;
 }
 
+/* Details panel vertical scrollbars: drop below the column header banner on
+   Trackers / Peers / Content and below the top Progress bar on General so
+   no scrollbar thumb ever pokes into the header or top card corner. */
+PropertiesWidget QTreeView QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 10px;
+    margin: 38px 2px 4px 0;
+}
+
+PropertiesWidget #pageGeneral QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 10px;
+    margin: 44px 2px 4px 0;
+}
+
+PropertiesWidget QListWidget QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 10px;
+    margin: 6px 2px 6px 0;
+}
+
 /* ============================================================= STATUS BAR == */
 
 /* the status bar is one footer card, inset 8px like the panels above it.
@@ -1105,10 +1144,10 @@ PropertiesWidget QListWidget::item {
    (9 + 3 = 12 = 20 - 8 clear) and the items sit centred: 11px each side */
 QStatusBar {
     background: transparent;
-    border-image: url(":/uitheme/ui/statusbar-card.svg") 9 17 20 17 stretch stretch;
-    border-width: 9px 17px 20px 17px;
+    border-image: url(":/uitheme/ui/statusbar-card.svg") 12 21 20 21 stretch stretch;
+    border-width: 12px 21px 20px 21px;
     color: $text2;
-    min-height: 19px;
+    min-height: 16px;
 }
 
 QStatusBar::item {
@@ -1123,7 +1162,7 @@ QStatusBar QLabel {
     background: transparent;
     border-style: solid;
     border-color: transparent;
-    border-width: 3px 8px 11px 0;
+    border-width: 3px 14px 11px 0;
     padding: 0 12px;
     min-height: 16px;
     max-height: 16px;
@@ -1140,7 +1179,7 @@ QStatusBar QPushButton {
     color: $text2;
     border-style: solid;
     border-color: transparent;
-    border-width: 4px 18px 12px 10px;
+    border-width: 4px 24px 12px 10px;
     border-radius: 0;
     padding: 0;
     margin: 0 2px;
@@ -1151,13 +1190,13 @@ QStatusBar QPushButton {
 }
 
 QStatusBar QPushButton:hover {
-    border-image: url(":/uitheme/ui/status-hover.svg") 4 18 12 10 stretch stretch;
+    border-image: url(":/uitheme/ui/status-hover.svg") 4 24 12 10 stretch stretch;
     background-color: transparent;
     color: $text;
 }
 
 QStatusBar QPushButton:pressed {
-    border-image: url(":/uitheme/ui/status-press.svg") 4 18 12 10 stretch stretch;
+    border-image: url(":/uitheme/ui/status-press.svg") 4 24 12 10 stretch stretch;
     background-color: transparent;
     color: $accentText;
 }
@@ -1169,10 +1208,10 @@ QStatusBar QFrame[frameShape="5"] {
     background-clip: padding;
     border-top: 1px solid transparent;
     border-bottom: 9px solid transparent;
-    /* every item carries 8px clear on its right (so the last one stays inside
-       the card); the divider takes 8px clear on its right too, so it sits
-       centred between the pills (Qt ignores margins here) */
-    border-right: 8px solid transparent;
+    /* every item carries 14px clear on its right (8px outside the card + 6px
+       inner clearance so the last pill stays clear of the 12px corner even
+       when maximized and Qt hides QSizeGrip); dividers match it to stay centred */
+    border-right: 14px solid transparent;
     min-width: 1px;
     max-width: 1px;
     min-height: 14px;
@@ -1731,8 +1770,10 @@ OptionsDialog {
 }
 
 /* the page list: qBittorrent sets each entry's height in code, so the grid
-   gives the rows a 40px pitch and the margins draw a 34px pill in each */
-OptionsDialog QListWidget {
+   gives the rows a 40px pitch and the margins draw a 34px pill in each.
+   Scoped to #tabSelection / #hsplitter / #tabOption so child dialogs opened
+   from Options (like AutomatedRssDownloader) never inherit Options rules. */
+OptionsDialog #tabSelection {
     background-color: $card;
     border: 1px solid $line;
     border-radius: 12px;
@@ -1749,44 +1790,44 @@ OptionsDialog QListWidget {
     margin-top: 0;
 }
 
-OptionsDialog QListWidget::item {
+OptionsDialog #tabSelection::item {
     padding: 0 10px;
     border-radius: 8px;
     margin: 4px 0 25px 0;
     color: $text;
 }
 
-OptionsDialog QSplitter::handle {
+OptionsDialog #hsplitter::handle {
     background-color: $canvas;
 }
 
 /* the page's own 9px layout margin + 1px handle = 10px from the page list to
    the cards, the same as between two cards and between the buttons */
-OptionsDialog QSplitter {
+OptionsDialog #hsplitter {
     qproperty-handleWidth: 1;
 }
 
 /* OK / Cancel / Apply: 6px below the pages by default; 4px more = 10.
    The layout's 6px between buttons + 2 + 2 = 10 apart, and the 2px on the
    right puts Apply's right edge level with the scroll bar's */
-OptionsDialog QDialogButtonBox QPushButton {
+OptionsDialog > QDialogButtonBox QPushButton {
     margin-top: 4px;
     margin-left: 2px;
     margin-right: 2px;
 }
 
-OptionsDialog QListWidget::item:selected {
+OptionsDialog #tabSelection::item:selected {
     background-color: $sel;
 }
 
-OptionsDialog QListWidget::item:hover:!selected {
+OptionsDialog #tabSelection::item:hover:!selected {
     background-color: $hover;
 }
 
-OptionsDialog QScrollArea > QWidget > QWidget,
-OptionsDialog QStackedWidget,
-OptionsDialog QStackedWidget > QWidget,
-OptionsDialog QStackedWidget QScrollArea > QWidget {
+OptionsDialog #tabOption QScrollArea > QWidget > QWidget,
+OptionsDialog #tabOption,
+OptionsDialog #tabOption > QWidget,
+OptionsDialog #tabOption QScrollArea > QWidget {
     background: transparent;
 }
 
@@ -1804,17 +1845,17 @@ OptionsDialog QStackedWidget QScrollArea > QWidget {
    empty space under its square, so cards that end on one get less padding. */
 /* -9px on top hides the page layout's empty 9px top margin, so the first
    card starts at the dialog's 11px margin like the page list */
-OptionsDialog QStackedWidget QScrollArea {
+OptionsDialog #tabOption QScrollArea {
     background: transparent;
     border: none;
     padding: 0;
     margin-top: -9px;
 }
 
-OptionsDialog QScrollArea QComboBox,
-OptionsDialog QScrollArea QLineEdit,
-OptionsDialog QScrollArea QAbstractSpinBox,
-OptionsDialog QScrollArea QPushButton {
+OptionsDialog #tabOption QScrollArea QComboBox,
+OptionsDialog #tabOption QScrollArea QLineEdit,
+OptionsDialog #tabOption QScrollArea QAbstractSpinBox,
+OptionsDialog #tabOption QScrollArea QPushButton {
     min-height: 18px;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -1822,8 +1863,8 @@ OptionsDialog QScrollArea QPushButton {
     margin-bottom: 1px;
 }
 
-OptionsDialog QScrollArea QCheckBox,
-OptionsDialog QScrollArea QRadioButton {
+OptionsDialog #tabOption QScrollArea QCheckBox,
+OptionsDialog #tabOption QScrollArea QRadioButton {
     min-height: 20px;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -1833,7 +1874,7 @@ OptionsDialog QScrollArea QRadioButton {
 
 /* rate and time spin boxes ask Qt for a taller box (∞ glyph, time sections);
    hold them to the same 32px */
-OptionsDialog QScrollArea QAbstractSpinBox {
+OptionsDialog #tabOption QScrollArea QAbstractSpinBox {
     max-height: 18px;
 }
 
@@ -1843,7 +1884,7 @@ OptionsDialog QScrollArea QAbstractSpinBox {
    2px above and below each card + the layout's 6px spacing = 10 between
    cards (= page list -> cards, button -> button); a loose
    row between cards gets 2-3 + 6 + its 1px margin on each side. */
-OptionsDialog QScrollArea QGroupBox {
+OptionsDialog #tabOption QScrollArea QGroupBox {
     background-color: $card;
     border: 1px solid $line;
     border-radius: 12px;
@@ -1851,7 +1892,7 @@ OptionsDialog QScrollArea QGroupBox {
     padding: 37px 9px 8px 9px;
 }
 
-OptionsDialog QScrollArea QGroupBox::title {
+OptionsDialog #tabOption QScrollArea QGroupBox::title {
     subcontrol-origin: border;
     subcontrol-position: top left;
     top: 16px;
@@ -1882,7 +1923,7 @@ OptionsDialog #checkWebUI {
 
 /* the scroll bar starts level with the first card's top edge (the same 9px
    layout margin the cards have) and ends level with the page list's bottom */
-OptionsDialog QStackedWidget QScrollArea QScrollBar:vertical {
+OptionsDialog #tabOption QScrollArea QScrollBar:vertical {
     margin: 9px 2px 1px 0;
 }
 
@@ -1900,15 +1941,15 @@ OptionsDialog #checkWebUI {
 
 /* settings outside any section sit between the cards, lined up with the
    cards' contents (18px in) */
-OptionsDialog QScrollArea > QWidget > QWidget > QCheckBox,
-OptionsDialog QScrollArea > QWidget > QWidget > QRadioButton,
-OptionsDialog QScrollArea > QWidget > QWidget > QLabel {
+OptionsDialog #tabOption QScrollArea > QWidget > QWidget > QCheckBox,
+OptionsDialog #tabOption QScrollArea > QWidget > QWidget > QRadioButton,
+OptionsDialog #tabOption QScrollArea > QWidget > QWidget > QLabel {
     margin-left: 18px;
 }
 
 /* sub-heading inside a card: no surface of its own. 1 row margin + 6 spacing
    + 9 = 16 above its text, which is 16px tall; 23 + 9 + 1 - 25 = 8 below */
-OptionsDialog QScrollArea QGroupBox QGroupBox {
+OptionsDialog #tabOption QScrollArea QGroupBox QGroupBox {
     background-color: transparent;
     border: none;
     border-radius: 0;
@@ -1917,7 +1958,7 @@ OptionsDialog QScrollArea QGroupBox QGroupBox {
     padding: 0;
 }
 
-OptionsDialog QScrollArea QGroupBox QGroupBox::title {
+OptionsDialog #tabOption QScrollArea QGroupBox QGroupBox::title {
     subcontrol-origin: margin;
     top: 9px;
     left: 0;
@@ -1925,11 +1966,11 @@ OptionsDialog QScrollArea QGroupBox QGroupBox::title {
 
 /* a checkable sub-section behaves like one more row: its check box title is
    centred in a 34px row slot and its contents start one 40px pitch below */
-OptionsDialog QScrollArea QGroupBox QGroupBox[checkable="true"] {
+OptionsDialog #tabOption QScrollArea QGroupBox QGroupBox[checkable="true"] {
     margin-top: 31px;
 }
 
-OptionsDialog QScrollArea QGroupBox QGroupBox[checkable="true"]::title {
+OptionsDialog #tabOption QScrollArea QGroupBox QGroupBox[checkable="true"]::title {
     top: 7px;
 }
 
@@ -2006,10 +2047,51 @@ QDialog AdvancedSettings::item:selected {
     color: $text;
 }
 
-LogListView,
-ExecutionLogWidget QListView {
+/* Execution Log tab: 12px card matching Transfers and RSS, with clean inset
+   scrollbar and soft rounded log-entry highlights */
+MainWindow ExecutionLogWidget QListView,
+ExecutionLogWidget LogListView {
     background-color: $card;
+    alternate-background-color: $card;
+    border: 1px solid $line;
+    border-radius: 12px;
+    padding: 6px;
+    margin: 2px 4px 8px 0;
+}
+
+ExecutionLogWidget QListView::item {
     border: none;
+    border-radius: 6px;
+    padding: 3px 8px;
+    margin: 1px 0;
+}
+
+ExecutionLogWidget QListView::item:hover {
+    background-color: $hover;
+}
+
+ExecutionLogWidget QListView::item:selected {
+    background-color: $sel;
+}
+
+ExecutionLogWidget QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 11px;
+    margin: 4px 2px 4px 2px;
+}
+
+ExecutionLogWidget QScrollBar::handle {
+    border-radius: 3px;
+}
+
+ExecutionLogWidget #tabConsole::tab-bar {
+    top: 2px;
+}
+
+ExecutionLogWidget #tabConsole > QTabBar::tab {
+    padding: 12px 6px;
+    margin: 0 2px 4px 2px;
 }
 
 QCalendarWidget QWidget#qt_calendar_navigationbar {
@@ -2025,7 +2107,13 @@ QCalendarWidget QAbstractItemView {
 /* Every drop-down opens 6px below its control. Qt places a popup at the bottom
    of the widget's rect, margins included, so a 6px bottom margin is the gap. */
 
-/* Speed tab: Period and Select Graphs */
+/* Speed tab: Period label and Period / Select Graphs drop-downs share the same
+   6px bottom margin so Period sits dead-level with both boxes */
+SpeedWidget QLabel {
+    color: $text2;
+    margin: 0 4px 6px 2px;
+}
+
 SpeedWidget QComboBox {
     margin-bottom: 6px;
 }
@@ -2042,12 +2130,71 @@ SpeedWidget ComboBoxMenuButton {
    transfer list. Rows are the sidebar's 32px pills, which also keeps the
    Windows 11 style from painting its selection bar in the indent. */
 
+/* icon-to-text breathing room on RSS and Search action buttons (same wider
+   viewBox pill-icon trick used on PropertiesWidget tabs) */
+RSSWidget QPushButton,
+SearchWidget QPushButton {
+    qproperty-iconSize: 20px 16px;
+}
+
+RSSWidget #newFeedButton { qproperty-icon: url(":/uitheme/ui/pill-list-add.svg"); }
+RSSWidget #markReadButton { qproperty-icon: url(":/uitheme/ui/pill-task-complete.svg"); }
+RSSWidget #updateAllButton { qproperty-icon: url(":/uitheme/ui/pill-view-refresh.svg"); }
+RSSWidget #rssDownloaderBtn { qproperty-icon: url(":/uitheme/ui/pill-downloading.svg"); }
+SearchWidget #searchButton { qproperty-icon: url(":/uitheme/ui/pill-edit-find.svg"); }
+SearchWidget #stopButton { qproperty-icon: url(":/uitheme/ui/pill-task-reject.svg"); }
+SearchWidget #pluginsButton { qproperty-icon: url(":/uitheme/ui/pill-plugins.svg"); }
+
+/* strip trailing "..." from button labels and filter placeholders */
+RSSWidget #rssDownloaderBtn,
+QPushButton[text="RSS Downloader..."] { qproperty-text: "RSS Downloader"; }
+AutomatedRssDownloader #importBtn,
+QPushButton[text="Import..."],
+QPushButton[text="&Import..."] { qproperty-text: "&Import"; }
+AutomatedRssDownloader #exportBtn,
+QPushButton[text="Export..."],
+QPushButton[text="&Export..."] { qproperty-text: "&Export"; }
+OptionsDialog #tabOption QScrollArea QPushButton#btnEditRules,
+QPushButton#btnEditRules { qproperty-text: "Edit auto downloading rules"; }
+SearchWidget #pluginsButton,
+QPushButton[text="Search plugins..."] { qproperty-text: "Search plugins"; }
+OptionsDialog #tabOption QScrollArea QPushButton#buttonCustomizeUITheme,
+QPushButton#buttonCustomizeUITheme { qproperty-text: "Customize UI Theme"; }
+QPushButton[text="Manually banned IP addresses..."] { qproperty-text: "Manually banned IP addresses"; }
+QPushButton[text="Manage Cookies..."] { qproperty-text: "Manage Cookies"; }
+QPushButton[text="Browse..."],
+QPushButton[text="&Browse..."] { qproperty-text: "&Browse"; }
+QPushButton[text="Edit..."],
+QPushButton[text="&Edit..."] { qproperty-text: "&Edit"; }
+QPushButton[text="Select..."],
+QPushButton[text="&Select..."] { qproperty-text: "&Select"; }
+QPushButton[text="Add..."],
+QPushButton[text="&Add..."] { qproperty-text: "&Add"; }
+QLineEdit[placeholderText="Filter feed items..."] { qproperty-placeholderText: "Filter feed items"; }
+QLineEdit[placeholderText="Filter torrents..."] { qproperty-placeholderText: "Filter torrents"; }
+QLineEdit[placeholderText="Filter files..."] { qproperty-placeholderText: "Filter files"; }
+QLineEdit[placeholderText="Filter search results..."] { qproperty-placeholderText: "Filter search results"; }
+QLineEdit[placeholderText="Search..."] { qproperty-placeholderText: "Search"; }
+
+/* 8px between the three cards, matching the main window's 8px outer edges
+   and the Transfers sidebar gap */
+RSSWidget #splitterSide,
+RSSWidget #splitterMain {
+    qproperty-handleWidth: 8;
+}
+
+RSSWidget #splitterSide::handle:horizontal,
+RSSWidget #splitterMain::handle:horizontal {
+    width: 8px;
+    background: transparent;
+}
+
 RSSWidget #feedListWidget,
 RSSWidget #articleListWidget {
     background-color: $card;
     alternate-background-color: $card;
     border: 1px solid $line;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 4px 0 6px 0;
     qproperty-iconSize: 16px 16px;
     show-decoration-selected: 1;
@@ -2126,19 +2273,26 @@ RSSWidget #feedListWidget QHeaderView::down-arrow {
     height: 0;
 }
 
-/* scroll bars in their own lane along the card edge, as in the transfer list */
+/* scroll bars inset cleanly from the card's right edge; RSS feeds drops below
+   its header row so the thumb never pokes into the "RSS feeds" banner */
 RSSWidget #feedListWidget QScrollBar:vertical,
-RSSWidget #articleListWidget QScrollBar:vertical {
+RSSWidget #articleListWidget QScrollBar:vertical,
+RSSWidget #textBrowser QScrollBar:vertical {
     background: transparent;
     border: none;
-    width: 10px;
+    width: 15px;
     margin: 0;
-    padding: 4px 1px 4px 1px;
+    padding: 6px 6px 6px 2px;
+}
+
+RSSWidget #feedListWidget QScrollBar:vertical {
+    margin: 34px 0 0 0;
 }
 
 RSSWidget #feedListWidget QScrollBar::handle,
-RSSWidget #articleListWidget QScrollBar::handle {
-    border-radius: 4px;
+RSSWidget #articleListWidget QScrollBar::handle,
+RSSWidget #textBrowser QScrollBar::handle {
+    border-radius: 3px;
 }
 
 /* "Torrents: (double-click to download)": a caption over the two right cards,
@@ -2156,7 +2310,7 @@ RSSWidget #news_lbl {
 RSSWidget #textBrowser {
     background-color: $card;
     border: 1px solid $line;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 10px 12px;
     selection-background-color: $selSolid;
     selection-color: $text;
@@ -2168,8 +2322,28 @@ RSSWidget #textBrowser {
 /* room for the rule editor: its rows need ~610px, so the middle column never
    clips or scrolls sideways, and the buttons always fit below the columns */
 AutomatedRssDownloader {
-    min-width: 1180px;
+    /* rules ~260 + editor 640 + articles 330 + two 10px gaps + margins */
+    min-width: 1320px;
     min-height: 760px;
+}
+
+/* the three cards sit 10px apart (qproperty-handleWidth actually sets the
+   QSplitter layout gap; ::handle width alone is ignored under windows11) */
+AutomatedRssDownloader #mainSplitter {
+    qproperty-handleWidth: 10;
+}
+
+AutomatedRssDownloader #mainSplitter::handle:horizontal {
+    width: 10px;
+    background: transparent;
+}
+
+/* Matching articles: at the stock 236px with a ~60px tree indent, titles were
+   cut to a dozen letters ("Severance S02..."). A shallow indent and a wider
+   floor keep them readable. */
+AutomatedRssDownloader #matchingArticlesTree {
+    qproperty-indentation: 14;
+    min-width: 320px;
 }
 
 AutomatedRssDownloader #ruleScrollArea {
@@ -2184,7 +2358,7 @@ AutomatedRssDownloader #matchingArticlesTree {
     alternate-background-color: $card;
     border: 1px solid $line;
     border-radius: 12px;
-    padding: 4px 0;
+    padding: 4px 6px 4px 0;
     show-decoration-selected: 1;
 }
 
@@ -2216,9 +2390,27 @@ AutomatedRssDownloader #matchingArticlesTree::item:selected {
     background-color: $sel;
 }
 
+/* opaque: Qt paints the row panel (and Windows 11 its accent bar) under the
+   indent first; the card colour covers it so hover/selection starts cleanly
+   at the item's pill (matching the Content tab); symmetric 6px left/right
+   padding gives the expand chevron clean breathing room on the left */
+AutomatedRssDownloader #matchingArticlesTree {
+    show-decoration-selected: 0;
+    padding: 4px 6px 4px 6px;
+}
+
 AutomatedRssDownloader #matchingArticlesTree::branch,
+AutomatedRssDownloader #matchingArticlesTree::branch:hover,
 AutomatedRssDownloader #matchingArticlesTree::branch:selected {
-    background-color: transparent;
+    background-color: $card;
+}
+
+/* equal top/bottom spacing around the bottom action row (Import / Export / Close):
+   6px layout spacing + 5px = 11px above, matching the 11px below */
+AutomatedRssDownloader #importBtn,
+AutomatedRssDownloader #exportBtn,
+AutomatedRssDownloader QDialogButtonBox QPushButton {
+    margin-top: 5px;
 }
 
 /* column titles: one caption style, level with the rule list's tool buttons */
@@ -2250,6 +2442,105 @@ AutomatedRssDownloader #exportBtn:default:hover {
 AutomatedRssDownloader #matchingArticlesLabel {
     min-height: 33px;
     max-height: 33px;
+}
+
+/* ---- RSS Downloader, three cards (1.2.5)
+   Rules | Rule editor | Matching articles. The editor is a card like the two
+   lists, its top on their top line; "Torrent parameters" becomes a section of
+   that card (a rule above it) instead of a card floating on the canvas. */
+AutomatedRssDownloader #ruleScrollArea {
+    background-color: $card;
+    border: 1px solid $line;
+    border-radius: 12px;
+    margin-top: 39px;
+    padding: 6px 8px 6px 10px;
+}
+
+AutomatedRssDownloader #ruleScrollArea > QWidget,
+AutomatedRssDownloader #scrollAreaWidgetContents {
+    background: transparent;
+}
+
+/* scroll bars inside the RSS Downloader cards: slight breathing room along
+   each card's right border (combined with the card's right padding above) */
+AutomatedRssDownloader QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 11px;
+    margin: 4px 2px 4px 2px;
+}
+
+AutomatedRssDownloader QScrollBar::handle {
+    border-radius: 3px;
+}
+
+/* Must Contain / Must Not Contain / Episode Filter reserve a status-icon
+   column on their right (13px); align "Ignore Subsequent Matches" and
+   "Last Match" to the same right edge */
+AutomatedRssDownloader #spinIgnorePeriod,
+AutomatedRssDownloader #lblLastMatch {
+    margin-right: 13px;
+}
+
+AutomatedRssDownloader #torrentParametersGroupBox {
+    background: transparent;
+    border: none;
+    border-top: 1px solid $line;
+    border-radius: 0;
+    margin-top: 46px;
+    padding: 14px 0 0 0;
+}
+
+AutomatedRssDownloader #torrentParametersGroupBox::title {
+    left: 0;
+    top: 16px;
+}
+
+/* No rule selected disables the whole editor. Dashed outlines on every field
+   then read as broken; here a disabled field is a quiet solid outline. */
+AutomatedRssDownloader QLineEdit:disabled,
+AutomatedRssDownloader QAbstractSpinBox:disabled,
+AutomatedRssDownloader QComboBox:disabled {
+    background-color: transparent;
+    border: 1px solid $line2;
+}
+
+/* "Apply Rule to Feeds" lives under the editor; never let it collapse to
+   nothing (a saved 0px height hid it with no visible way back) */
+AutomatedRssDownloader #ruleDefSplitter {
+    qproperty-childrenCollapsible: false;
+}
+
+AutomatedRssDownloader #listFeeds {
+    min-height: 96px;
+}
+
+AutomatedRssDownloader #lblListFeeds {
+    padding-top: 8px;
+}
+
+/* share limits (RSS rule, Add torrent, Torrent options): the Mode box sized to
+   its contents was cut off ("From category (Match a") once the theme's padding
+   and arrow were added; give it the room of the Action box below it */
+TorrentShareLimitsWidget #comboBoxMode {
+    min-width: 250px;
+}
+
+/* "Auto downloading is disabled": a notice, not a raw red line
+   (qBittorrent pins its text colour; the box and icon are ours) */
+AutomatedRssDownloader #labelWarn {
+    font-style: normal;
+    background-color: $errSoft;
+    background-image: url(":/uitheme/ui/warning-16.svg");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-origin: padding;
+    background-clip: border;
+    border: none;
+    border-left: 10px solid transparent;  /* the icon's inset; the fill runs under it */
+    border-radius: 8px;
+    padding: 7px 12px 7px 24px;
+    margin: 0 0 6px 0;
 }
 
 /* ========================================================= TORRENT CREATOR == */
@@ -2399,6 +2690,13 @@ AddNewTorrentDialog QHeaderView::section:last {
     border-right: none;
 }
 
+AddNewTorrentDialog QTreeView QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 10px;
+    margin: 38px 2px 4px 0;
+}
+
 /* Tags: qBittorrent's placeholder says "Click [...] button", so the button keeps
    its "..." and gets the field look: 32px square, outlined, beside the field */
 AddNewTorrentDialog #tagsEditButton {
@@ -2418,4 +2716,303 @@ AddNewTorrentDialog #tagsEditButton:hover {
     background-color: $hover;
     border-color: $lineStrong;
     color: $text;
+}
+
+
+/* =============================================================== PLUGINS == */
+/* PluginsDialog (Plugins -> Manage Plugins) and SearchPluginSelectDialog
+   (Search -> Search plugins): same card, header, row pills and button spacing
+   as RSS Downloader and Add New Torrent. */
+
+PluginsDialog {
+    min-width: 640px;
+    min-height: 440px;
+}
+
+SearchPluginSelectDialog {
+    min-width: 680px;
+    min-height: 480px;
+}
+
+PluginsDialog #pluginsLabel,
+SearchPluginSelectDialog #lbl_plugins {
+    color: $text2;
+    font-size: 9pt;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 2px 0 4px 4px;
+}
+
+SearchPluginSelectDialog #getNewPlugin_lbl {
+    color: $text2;
+    padding: 4px 4px 2px 4px;
+}
+
+PluginsDialog QTreeView,
+SearchPluginSelectDialog QTreeView {
+    background-color: $card;
+    alternate-background-color: $card;
+    border: 1px solid $line;
+    border-radius: 12px;
+    padding: 4px 6px;
+    show-decoration-selected: 0;
+}
+
+PluginsDialog QTreeView::branch,
+PluginsDialog QTreeView::branch:hover,
+PluginsDialog QTreeView::branch:selected,
+SearchPluginSelectDialog QTreeView::branch,
+SearchPluginSelectDialog QTreeView::branch:hover,
+SearchPluginSelectDialog QTreeView::branch:selected {
+    background-color: $card;
+}
+
+PluginsDialog QTreeView::item,
+SearchPluginSelectDialog QTreeView::item {
+    color: $text;
+    background: transparent;
+    border: none;
+    height: 22px;
+    padding: 5px 8px;
+    margin: 1px 0;
+}
+
+PluginsDialog QTreeView::item:hover,
+SearchPluginSelectDialog QTreeView::item:hover {
+    background-color: $hover;
+}
+
+PluginsDialog QTreeView::item:selected,
+SearchPluginSelectDialog QTreeView::item:selected {
+    background-color: $sel;
+}
+
+PluginsDialog QTreeView::item:first,
+SearchPluginSelectDialog QTreeView::item:first {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+PluginsDialog QTreeView::item:last,
+SearchPluginSelectDialog QTreeView::item:last {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+PluginsDialog QTreeView::item:only-one,
+SearchPluginSelectDialog QTreeView::item:only-one {
+    border-radius: 8px;
+}
+
+PluginsDialog QHeaderView,
+SearchPluginSelectDialog QHeaderView {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $line;
+    margin-bottom: 4px;
+    min-height: 36px;
+    max-height: 36px;
+}
+
+PluginsDialog QHeaderView::section,
+SearchPluginSelectDialog QHeaderView::section {
+    color: $text;
+    font-weight: 500;
+    font-size: 9pt;
+    border: none;
+    border-right: 1px solid $colsep;
+    margin: 10px 0 6px 0;
+    padding: 0 10px;
+}
+
+PluginsDialog QHeaderView::section:last,
+SearchPluginSelectDialog QHeaderView::section:last {
+    border-right: none;
+}
+
+PluginsDialog QScrollBar:vertical,
+SearchPluginSelectDialog QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 11px;
+    margin: 40px 2px 4px 2px;
+}
+
+PluginsDialog QScrollBar::handle,
+SearchPluginSelectDialog QScrollBar::handle {
+    border-radius: 3px;
+}
+
+PluginsDialog QPushButton,
+SearchPluginSelectDialog QPushButton {
+    margin-top: 5px;
+    min-width: 84px;
+}
+
+
+/* ======================================================= MANAGE COOKIES == */
+/* CookiesDialog (Tools -> Manage Cookies): matching 12px card table, header
+   rule + column dividers, rounded row pills, opaque branch (no Windows 11
+   indent accent artifact), and framed +/- action buttons. */
+
+CookiesDialog {
+    min-width: 660px;
+    min-height: 440px;
+}
+
+CookiesDialog QTreeView {
+    background-color: $card;
+    alternate-background-color: $card;
+    border: 1px solid $line;
+    border-radius: 12px;
+    padding: 4px 6px;
+    show-decoration-selected: 0;
+}
+
+CookiesDialog QTreeView::branch,
+CookiesDialog QTreeView::branch:hover,
+CookiesDialog QTreeView::branch:selected {
+    background-color: $card;
+}
+
+CookiesDialog QTreeView::item {
+    color: $text;
+    background: transparent;
+    border: none;
+    height: 22px;
+    padding: 5px 8px;
+    margin: 1px 0;
+}
+
+CookiesDialog QTreeView::item:hover {
+    background-color: $hover;
+}
+
+CookiesDialog QTreeView::item:selected {
+    background-color: $sel;
+}
+
+CookiesDialog QTreeView::item:first {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+CookiesDialog QTreeView::item:last {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+CookiesDialog QTreeView::item:only-one {
+    border-radius: 8px;
+}
+
+CookiesDialog QHeaderView {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $line;
+    margin-bottom: 4px;
+    min-height: 36px;
+    max-height: 36px;
+}
+
+CookiesDialog QHeaderView::section {
+    color: $text;
+    font-weight: 500;
+    font-size: 9pt;
+    border: none;
+    border-right: 1px solid $colsep;
+    margin: 10px 0 6px 0;
+    padding: 0 10px;
+}
+
+CookiesDialog QHeaderView::section:last {
+    border-right: none;
+}
+
+CookiesDialog QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 11px;
+    margin: 40px 2px 4px 2px;
+}
+
+CookiesDialog QScrollBar::handle {
+    border-radius: 3px;
+}
+
+CookiesDialog QToolButton {
+    background-color: $card;
+    border: 1px solid $line;
+    border-radius: 10px;
+    padding: 6px;
+    margin-left: 4px;
+}
+
+CookiesDialog QToolButton:hover {
+    background-color: $field;
+    border-color: $lineStrong;
+}
+
+CookiesDialog QToolButton:pressed {
+    background-color: $sel;
+}
+
+CookiesDialog QDialogButtonBox QPushButton {
+    margin-top: 5px;
+    min-width: 80px;
+}
+
+
+/* =========================================================== STATISTICS == */
+/* StatsDialog (View -> Statistics): compact card rhythm + taller default floor
+   so all four cards (User, Cache, Performance, Tracker) fit without scrolling,
+   with muted labels and crisp primary values matching the General tab. */
+
+StatsDialog {
+    min-width: 400px;
+    min-height: 685px;
+}
+
+StatsDialog QGroupBox {
+    margin-top: 28px;
+    padding: 10px 14px;
+    font-size: 10pt;
+}
+
+StatsDialog QGroupBox::title {
+    left: 14px;
+    top: 4px;
+}
+
+StatsDialog #labelAlltimeULText,
+StatsDialog #labelAlltimeDLText,
+StatsDialog #labelGlobalRatioText,
+StatsDialog #labelWasteText,
+StatsDialog #labelPeersText,
+StatsDialog #labelCacheHitsText,
+StatsDialog #labelTotalBufText,
+StatsDialog #labelWriteStarveText,
+StatsDialog #labelReadStarveText,
+StatsDialog #labelQueuedJobsText,
+StatsDialog #labelJobsTimeText,
+StatsDialog #labelQueuedBytesText,
+StatsDialog #labelRequestLatencyText,
+StatsDialog #labelQueuedTrackerAnnouncesText_2 {
+    color: $text3;
+}
+
+StatsDialog QScrollBar:vertical {
+    background: transparent;
+    border: none;
+    width: 11px;
+    margin: 4px 2px 4px 2px;
+}
+
+StatsDialog QScrollBar::handle {
+    border-radius: 3px;
+}
+
+StatsDialog QDialogButtonBox QPushButton {
+    margin-top: 6px;
+    min-width: 84px;
 }
