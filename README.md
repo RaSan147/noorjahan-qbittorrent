@@ -28,14 +28,11 @@ Light and Dark · Regular and Compact · a matching Web UI
 
 <p align="center">
   <a href="https://ibb.co.com/album/y6b6dZ">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/hero/main-dark.webp">
-      <img src=".github/assets/hero/main-light.webp" alt="Noorjahan main window, downloading" width="100%">
-    </picture>
+    <img src=".github/assets/hero/main.webp" alt="Noorjahan main window downloading, switching between Light and Dark" width="100%">
   </a>
 </p>
 
-<p align="center"><sub>Light or Dark follows your GitHub theme. Switch it to see the other one.</sub></p>
+<p align="center"><sub>Light and Dark, live from the <a href="https://noorjahan.hamim2964.workers.dev/#tour">website demo</a>.</sub></p>
 
 <br>
 
