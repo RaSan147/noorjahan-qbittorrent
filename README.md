@@ -11,7 +11,7 @@ Light and Dark · Regular and Compact · a matching Web UI
 
 [![Version](https://img.shields.io/badge/version-1.3.1-1D786B?style=flat-square)](CHANGELOG.md)
 [![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3-55514C?style=flat-square)](https://www.qbittorrent.org)
-[![Web UI](https://img.shields.io/badge/Web%20UI-5.2.3%2B-55514C?style=flat-square)](#web-ui)
+[![Web UI](https://img.shields.io/badge/Web%20UI-5.2.3%2B-55514C?style=flat-square)](https://noorjahan.hamim2964.workers.dev/#webui)
 [![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
 
 <b><a href="https://noorjahan.hamim2964.workers.dev/#download">Download</a></b>
@@ -29,8 +29,8 @@ Light and Dark · Regular and Compact · a matching Web UI
 <p align="center">
   <a href="https://ibb.co.com/album/y6b6dZ">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://i.ibb.co.com/qL22FyS3/02-pc-main-dark.png">
-      <img src="https://i.ibb.co.com/BV0tyZvJ/01-pc-main-light.png" alt="Noorjahan main window" width="100%">
+      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/shots/02-pc-main-dark.png">
+      <img src=".github/assets/shots/01-pc-main-light.png" alt="Noorjahan main window" width="100%">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@ Light and Dark · Regular and Compact · a matching Web UI
 
 <br>
 
-## What it changes
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/what-it-changes-dark.svg"><img src=".github/assets/headings/what-it-changes-light.svg" alt="What it changes" height="31"></picture>
 
 **Warm stone surfaces, one teal accent, and 8 px of breathing room everywhere.** Colour only appears when something is happening.
 
@@ -56,21 +56,21 @@ Light and Dark · Regular and Compact · a matching Web UI
 </tr>
 </table>
 
-## Gallery
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/gallery-dark.svg"><img src=".github/assets/headings/gallery-light.svg" alt="Gallery" height="31"></picture>
 
 | Light | Dark |
 | :---: | :---: |
-| [![Main window, Light](https://i.ibb.co.com/BV0tyZvJ/01-pc-main-light.png)](https://ibb.co.com/VWftgSbG) | [![Main window, Dark](https://i.ibb.co.com/qL22FyS3/02-pc-main-dark.png)](https://ibb.co.com/0pzzVD7R) |
-| [![Options, Light](https://i.ibb.co.com/kgr3RLyz/03-pc-options-light.png)](https://ibb.co.com/svD50TPc) | [![Options, Dark](https://i.ibb.co.com/hF7RbmJX/04-pc-options-dark.png)](https://ibb.co.com/Mk2DrCx8) |
-| [![Web UI, Light](https://i.ibb.co.com/7Jng9FVd/05-webui-light.png)](https://ibb.co.com/Z6BHZCKp) | [![Web UI, Dark](https://i.ibb.co.com/20fFX6rh/06-webui-dark.png)](https://ibb.co.com/RGVgLSKb) |
+| [![Main window, Light](.github/assets/shots/01-pc-main-light.png)](https://ibb.co.com/VWftgSbG) | [![Main window, Dark](.github/assets/shots/02-pc-main-dark.png)](https://ibb.co.com/0pzzVD7R) |
+| [![Options, Light](.github/assets/shots/03-pc-options-light.png)](https://ibb.co.com/svD50TPc) | [![Options, Dark](.github/assets/shots/04-pc-options-dark.png)](https://ibb.co.com/Mk2DrCx8) |
+| [![Web UI, Light](.github/assets/shots/05-webui-light.png)](https://ibb.co.com/Z6BHZCKp) | [![Web UI, Dark](.github/assets/shots/06-webui-dark.png)](https://ibb.co.com/RGVgLSKb) |
 
 <p align="center"><sub>Click any shot for full size · <a href="https://ibb.co.com/album/y6b6dZ">Full album</a> · <a href="https://noorjahan.hamim2964.workers.dev/#compare">Interactive before &amp; after</a></sub></p>
 
-## Install
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/install-dark.svg"><img src=".github/assets/headings/install-light.svg" alt="Install" height="31"></picture>
 
 Everything is free on the **[website](https://noorjahan.hamim2964.workers.dev/#download)** and attached to every **[GitHub release](https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest)** with a `SHA256SUMS.txt`.
 
-### Desktop · Windows 10 & 11
+### <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/desktop-dark.svg"><img src=".github/assets/headings/desktop-light.svg" alt="Desktop · Windows 10 &amp; 11" height="24"></picture>
 
 **The easy way.** Download `Noorjahan-Setup.zip`, extract it and run **`Install Noorjahan.cmd`**. It installs all four themes and the [Inter](https://rsms.me/inter/) font for your user (no admin needed), backs up `qBittorrent.ini`, and can switch the theme on for you.
 
@@ -89,7 +89,7 @@ The theme works without Inter and falls back to Segoe UI. Inter gives the exact 
 > [!TIP]
 > In **Behavior › Transfer List**, turn on **Make progress bars follow text colors** so every bar matches its torrent: blue while downloading, green while seeding.
 
-### Web UI
+### <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/web-ui-dark.svg"><img src=".github/assets/headings/web-ui-light.svg" alt="Web UI" height="24"></picture>
 
 1. Download `Noorjahan-WebUI.zip` and extract it.
 2. In **Tools › Options › Web UI**, tick **Use alternative WebUI** and pick the `Noorjahan-WebUI` folder.
@@ -135,7 +135,7 @@ https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/<fi
 
 </details>
 
-## Compatibility
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/compatibility-dark.svg"><img src=".github/assets/headings/compatibility-light.svg" alt="Compatibility" height="31"></picture>
 
 | | Versions | Platform |
 | :-- | :-- | :-- |
@@ -156,7 +156,7 @@ This writes `build/light`, `build/dark`, `build/light-compact`, `build/dark-comp
 
 </details>
 
-## Credits & License
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/credits-dark.svg"><img src=".github/assets/headings/credits-light.svg" alt="Credits &amp; License" height="31"></picture>
 
 Noorjahan's architecture, visual design, Qt stylesheet, icon recolouring, Web UI restyle, and installer are by [chiefhamim](https://github.com/chiefhamim) and are licensed under [GPL-2.0-or-later](LICENSE). Not affiliated with the qBittorrent project.
 
