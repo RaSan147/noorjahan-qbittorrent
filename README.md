@@ -28,14 +28,11 @@ Light and Dark · Regular and Compact · a matching Web UI
 
 <p align="center">
   <a href="https://ibb.co.com/album/y6b6dZ">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/shots/02-pc-main-dark.png">
-      <img src=".github/assets/shots/01-pc-main-light.png" alt="Noorjahan main window" width="100%">
-    </picture>
+    <img src=".github/assets/hero/main.webp" alt="Noorjahan main window downloading, switching between Light and Dark" width="100%">
   </a>
 </p>
 
-<p align="center"><sub>The screenshot follows your GitHub theme. Switch it to see the other one.</sub></p>
+<p align="center"><sub>Light and Dark, live from the <a href="https://noorjahan.hamim2964.workers.dev/#tour">website demo</a>.</sub></p>
 
 <br>
 
@@ -58,20 +55,18 @@ Light and Dark · Regular and Compact · a matching Web UI
 
 ## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/gallery-dark.svg"><img src=".github/assets/headings/gallery-light.svg" alt="Gallery" height="31"></picture>
 
-<table>
-<tr>
-<td width="50%"><a href="https://ibb.co.com/VWftgSbG"><img src=".github/assets/gallery/01-pc-main-light.png" alt="Main window, Light" width="100%"></a></td>
-<td width="50%"><a href="https://ibb.co.com/0pzzVD7R"><img src=".github/assets/gallery/02-pc-main-dark.png" alt="Main window, Dark" width="100%"></a></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://ibb.co.com/svD50TPc"><img src=".github/assets/gallery/03-pc-options-light.png" alt="Options, Light" width="100%"></a></td>
-<td width="50%"><a href="https://ibb.co.com/Mk2DrCx8"><img src=".github/assets/gallery/04-pc-options-dark.png" alt="Options, Dark" width="100%"></a></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://ibb.co.com/Z6BHZCKp"><img src=".github/assets/gallery/05-webui-light.png" alt="Web UI, Light" width="100%"></a></td>
-<td width="50%"><a href="https://ibb.co.com/RGVgLSKb"><img src=".github/assets/gallery/06-webui-dark.png" alt="Web UI, Dark" width="100%"></a></td>
-</tr>
-</table>
+<p align="center">
+  <a href="https://ibb.co.com/VWftgSbG"><img src=".github/assets/gallery/01-pc-main-light.png" alt="Main window, Light" width="47%"></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://ibb.co.com/0pzzVD7R"><img src=".github/assets/gallery/02-pc-main-dark.png" alt="Main window, Dark" width="47%"></a>
+</p>
+<p align="center">
+  <a href="https://ibb.co.com/svD50TPc"><img src=".github/assets/gallery/03-pc-options-light.png" alt="Options, Light" width="47%"></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://ibb.co.com/Mk2DrCx8"><img src=".github/assets/gallery/04-pc-options-dark.png" alt="Options, Dark" width="47%"></a>
+</p>
+<p align="center">
+  <a href="https://ibb.co.com/Z6BHZCKp"><img src=".github/assets/gallery/05-webui-light.png" alt="Web UI, Light" width="47%"></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://ibb.co.com/RGVgLSKb"><img src=".github/assets/gallery/06-webui-dark.png" alt="Web UI, Dark" width="47%"></a>
+</p>
 
 <p align="center"><sub>Click any shot for full size · <a href="https://ibb.co.com/album/y6b6dZ">Full album</a> · <a href="https://noorjahan.hamim2964.workers.dev/#compare">Interactive before &amp; after</a></sub></p>
 
