@@ -13,10 +13,11 @@ By hand:
      (Light, Dark, Light Compact or Dark Compact).
   2. qBittorrent > Tools > Options > Behavior: tick "Use custom UI theme" and choose the file.
   3. On the same page, set Style to windows11 (Windows 10: windowsvista). Restart qBittorrent.
+     The Style option exists from qBittorrent 5.0.1; on older versions skip this step.
   4. Optional: open fonts\Inter.ttf and click Install.
 
 The theme works without Inter (it falls back to Segoe UI). Inter gives the exact look
 and spacing it was designed with.
 
-Made for qBittorrent 5.3 on Windows 10 and 11.
+Works on qBittorrent 4.6.0 and newer, on Windows 10 and 11. Looks best on 5.0.1 and newer.
 Inter is by The Inter Project Authors, SIL Open Font License 1.1 (fonts\OFL.txt).
