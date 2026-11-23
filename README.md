@@ -58,11 +58,20 @@ Light and Dark · Regular and Compact · a matching Web UI
 
 ## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/gallery-dark.svg"><img src=".github/assets/headings/gallery-light.svg" alt="Gallery" height="31"></picture>
 
-| Light | Dark |
-| :---: | :---: |
-| [![Main window, Light](.github/assets/shots/01-pc-main-light.png)](https://ibb.co.com/VWftgSbG) | [![Main window, Dark](.github/assets/shots/02-pc-main-dark.png)](https://ibb.co.com/0pzzVD7R) |
-| [![Options, Light](.github/assets/shots/03-pc-options-light.png)](https://ibb.co.com/svD50TPc) | [![Options, Dark](.github/assets/shots/04-pc-options-dark.png)](https://ibb.co.com/Mk2DrCx8) |
-| [![Web UI, Light](.github/assets/shots/05-webui-light.png)](https://ibb.co.com/Z6BHZCKp) | [![Web UI, Dark](.github/assets/shots/06-webui-dark.png)](https://ibb.co.com/RGVgLSKb) |
+<table>
+<tr>
+<td width="50%"><a href="https://ibb.co.com/VWftgSbG"><img src=".github/assets/gallery/01-pc-main-light.png" alt="Main window, Light" width="100%"></a></td>
+<td width="50%"><a href="https://ibb.co.com/0pzzVD7R"><img src=".github/assets/gallery/02-pc-main-dark.png" alt="Main window, Dark" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://ibb.co.com/svD50TPc"><img src=".github/assets/gallery/03-pc-options-light.png" alt="Options, Light" width="100%"></a></td>
+<td width="50%"><a href="https://ibb.co.com/Mk2DrCx8"><img src=".github/assets/gallery/04-pc-options-dark.png" alt="Options, Dark" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://ibb.co.com/Z6BHZCKp"><img src=".github/assets/gallery/05-webui-light.png" alt="Web UI, Light" width="100%"></a></td>
+<td width="50%"><a href="https://ibb.co.com/RGVgLSKb"><img src=".github/assets/gallery/06-webui-dark.png" alt="Web UI, Dark" width="100%"></a></td>
+</tr>
+</table>
 
 <p align="center"><sub>Click any shot for full size · <a href="https://ibb.co.com/album/y6b6dZ">Full album</a> · <a href="https://noorjahan.hamim2964.workers.dev/#compare">Interactive before &amp; after</a></sub></p>
 

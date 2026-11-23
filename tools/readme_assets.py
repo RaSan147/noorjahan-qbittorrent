@@ -6,6 +6,8 @@
   python tools/readme_assets.py shots <folder of original screenshots>
       Makes the screenshot corners transparent (8 px Windows 11 radius at 200 %)
       and writes .github/assets/shots/.
+  python tools/readme_assets.py gallery <folder of tbd-*.png cards>
+      Rounds the 1000x640 gallery cards and writes .github/assets/gallery/.
   python tools/readme_assets.py banner
       Rounds .github/assets/banner.png to the radius the hero screenshot shows.
 
@@ -120,6 +122,20 @@ def shots(src):
         print(f.name, im.size)
 
 
+GALLERY_RADIUS = 11       # px on a 1000 px card; looks like the banner's corners at half width
+
+
+def gallery(src):
+    from PIL import Image
+
+    out = ASSETS / "gallery"
+    out.mkdir(parents=True, exist_ok=True)
+    for f in sorted(Path(src).glob("tbd-*.png")):
+        name = f.name.removeprefix("tbd-")
+        rounded(Image.open(f), GALLERY_RADIUS).save(out / name, optimize=True)
+        print(name)
+
+
 def banner():
     from PIL import Image
 
@@ -136,6 +152,8 @@ if __name__ == "__main__":
         headings()
     elif cmd == "shots" and len(sys.argv) > 2:
         shots(sys.argv[2])
+    elif cmd == "gallery" and len(sys.argv) > 2:
+        gallery(sys.argv[2])
     elif cmd == "banner":
         banner()
     else:
