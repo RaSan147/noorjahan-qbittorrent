@@ -10,8 +10,8 @@ Light and Dark · Regular and Compact · a matching Web UI
 <br>
 
 [![Version](https://img.shields.io/badge/version-1.3.1-1D786B?style=flat-square)](CHANGELOG.md)
-[![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3-55514C?style=flat-square)](https://www.qbittorrent.org)
-[![Web UI](https://img.shields.io/badge/Web%20UI-5.2.3%2B-55514C?style=flat-square)](https://noorjahan.hamim2964.workers.dev/#webui)
+[![qBittorrent](https://img.shields.io/badge/qBittorrent-4.6%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
+[![Web UI](https://img.shields.io/badge/Web%20UI-5.2%2B-55514C?style=flat-square)](https://noorjahan.hamim2964.workers.dev/#webui)
 [![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
 
 <b><a href="https://noorjahan.hamim2964.workers.dev/#download">Download</a></b>
@@ -89,7 +89,7 @@ Everything is free on the **[website](https://noorjahan.hamim2964.workers.dev/#d
 
 1. Download one `.qbtheme` (Light, Dark, Light Compact or Dark Compact) and keep it somewhere permanent, such as `%APPDATA%\qBittorrent\themes`.
 2. In **Tools › Options › Behavior**, tick **Use custom UI theme** and pick the file.
-3. On the same page, set **Style** to **`windows11`** (`windowsvista` on Windows 10), then restart qBittorrent.
+3. On the same page, set **Style** to **`windows11`** (`windowsvista` on Windows 10), then restart qBittorrent. The Style option arrived in qBittorrent 5.0.1; on older versions skip this step.
 
 The theme works without Inter and falls back to Segoe UI. Inter gives the exact spacing it was designed with.
 
@@ -146,10 +146,24 @@ https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/<fi
 
 ## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/compatibility-dark.svg"><img src=".github/assets/headings/compatibility-light.svg" alt="Compatibility" height="31"></picture>
 
-| | Versions | Platform |
-| :-- | :-- | :-- |
-| **Desktop theme** | qBittorrent 5.3 | Windows 10 & 11, with or without Inter |
-| **Web UI** | qBittorrent 5.2.3 & 5.3.0 | Windows & Linux, tested on qBittorrent-nox on a Raspberry Pi 4 |
+| | Works on | Looks best on | Platform |
+| :-- | :-- | :-- | :-- |
+| **Desktop theme** | qBittorrent **4.6.0** and newer | 5.0.1 and newer | Windows 10 & 11, with or without Inter |
+| **Web UI** | qBittorrent **5.2.0** and newer | 5.2.x and 5.3.0 | Windows & Linux, tested on qBittorrent-nox on a Raspberry Pi 4 |
+
+<details>
+<summary><b>How these were tested, and what older versions miss</b></summary>
+<br>
+
+Fourteen qBittorrent releases from 4.2.5 to 5.3.0 were run in a sandbox with every theme and compared against 5.3.0.
+
+- **Desktop, 5.0.1 and newer:** identical to 5.3.0.
+- **Desktop, 4.6.0 to 5.0.0:** the same look, but these versions have no Style option. 5.0.0 picks `windows11` by itself on Windows 11; 4.6 uses `windowsvista`, so menus and drop-downs keep square corners.
+- **Desktop, 4.5.x and older:** not supported. Text turns bold and the sidebar loses its card, and 4.4 and older use different icon names, so about 75 icons stay stock.
+- **Web UI, 5.0.x and 5.1.x:** it loads, but these versions lack parts of the Web UI API it uses. Saved Web UI settings, the Add Torrent dialog's torrent preview and piece availability fail, and the tracker error count reads NaN.
+- **Web UI, 4.6.x:** Start and Stop do nothing (the API calls them pause and resume there).
+
+</details>
 
 <details>
 <summary><b>Build from source</b></summary>
