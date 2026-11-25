@@ -1,88 +1,180 @@
 <div align="center">
 
-# Noorjahan
-
-**A calmer, evenly spaced Light & Dark theme for qBittorrent — with a matching Web UI.**
-
-[![Version](https://img.shields.io/badge/version-1.2.2-1D786B?style=flat-square)](CHANGELOG.md)
-[![qBittorrent](https://img.shields.io/badge/qBittorrent-5.3%20%C2%B7%20Web%20UI%205.2.3%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
-[![Platforms](https://img.shields.io/badge/platforms-Windows%20%C2%B7%20Linux%20Web%20UI-55514C?style=flat-square)](#compatibility)
-[![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
+<a href="https://noorjahan.hamim2964.workers.dev/"><img src=".github/assets/banner.png" alt="Noorjahan, a theme for qBittorrent by chiefhamim" width="100%"></a>
 
 <br>
 
-### [Download & Try the Live Demo → noorjahan.hamim2964.workers.dev](https://noorjahan.hamim2964.workers.dev/)
+**A calmer, evenly spaced theme for qBittorrent.**<br>
+Light and Dark · Regular and Compact · a matching Web UI
 
-[Download](https://noorjahan.hamim2964.workers.dev/#download) · [Try Desktop Replica](https://noorjahan.hamim2964.workers.dev/#tour) · [Try Web UI](https://noorjahan.hamim2964.workers.dev/#webui) · [Before & After](https://noorjahan.hamim2964.workers.dev/#compare)
+<br>
+
+[![Version](https://img.shields.io/badge/version-1.3.1-1D786B?style=flat-square)](CHANGELOG.md)
+[![qBittorrent](https://img.shields.io/badge/qBittorrent-4.6%2B-55514C?style=flat-square)](https://www.qbittorrent.org)
+[![Web UI](https://img.shields.io/badge/Web%20UI-5.2%2B-55514C?style=flat-square)](https://noorjahan.hamim2964.workers.dev/#webui)
+[![License](https://img.shields.io/badge/license-GPL--2.0-55514C?style=flat-square)](LICENSE)
+
+<b><a href="https://noorjahan.hamim2964.workers.dev/#download">Download</a></b>
+&nbsp;&nbsp;·&nbsp;&nbsp;
+<a href="https://noorjahan.hamim2964.workers.dev/#tour">Live demo</a>
+&nbsp;&nbsp;·&nbsp;&nbsp;
+<a href="https://noorjahan.hamim2964.workers.dev/#compare">Before &amp; after</a>
+&nbsp;&nbsp;·&nbsp;&nbsp;
+<a href="CHANGELOG.md">Changelog</a>
 
 </div>
 
----
+<br>
 
-Noorjahan replaces qBittorrent's default chrome with warm stone surfaces, a single copper-patina teal accent, consistent 8 px card spacing, and 88 recoloured outline icons — using colour only when something is happening.
+<p align="center">
+  <a href="https://ibb.co.com/album/y6b6dZ">
+    <img src=".github/assets/hero/main.webp" alt="Noorjahan main window downloading, switching between Light and Dark" width="100%">
+  </a>
+</p>
 
-> [!NOTE]
-> The full showcase — including an interactive browser replica of the desktop app, a live Web UI demo, and side-by-side before/after comparisons — lives on the **[project website](https://noorjahan.hamim2964.workers.dev/)**.
+<p align="center"><sub>Light and Dark, live from the <a href="https://noorjahan.hamim2964.workers.dev/#tour">website demo</a>.</sub></p>
 
-## Previews
+<br>
 
-| Light | Dark |
-| :---: | :---: |
-| [![Desktop Main Window — Light](https://i.ibb.co.com/BV0tyZvJ/01-pc-main-light.png)](https://ibb.co.com/VWftgSbG)<br><sub>Desktop · Main Window (Light)</sub> | [![Desktop Main Window — Dark](https://i.ibb.co.com/qL22FyS3/02-pc-main-dark.png)](https://ibb.co.com/0pzzVD7R)<br><sub>Desktop · Main Window (Dark)</sub> |
-| [![Desktop Options — Light](https://i.ibb.co.com/kgr3RLyz/03-pc-options-light.png)](https://ibb.co.com/svD50TPc)<br><sub>Desktop · Options (Light)</sub> | [![Desktop Options — Dark](https://i.ibb.co.com/hF7RbmJX/04-pc-options-dark.png)](https://ibb.co.com/Mk2DrCx8)<br><sub>Desktop · Options (Dark)</sub> |
-| [![Web UI — Light](https://i.ibb.co.com/7Jng9FVd/05-webui-light.png)](https://ibb.co.com/Z6BHZCKp)<br><sub>Web UI (Light)</sub> | [![Web UI — Dark](https://i.ibb.co.com/20fFX6rh/06-webui-dark.png)](https://ibb.co.com/RGVgLSKb)<br><sub>Web UI (Dark)</sub> |
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/what-it-changes-dark.svg"><img src=".github/assets/headings/what-it-changes-light.svg" alt="What it changes" height="31"></picture>
 
-<p align="center"><sub>Click any screenshot for full resolution · <a href="https://ibb.co.com/album/y6b6dZ">Full album</a> · <a href="https://noorjahan.hamim2964.workers.dev/#compare">Interactive before &amp; after</a></sub></p>
+**Warm stone surfaces, one teal accent, and 8 px of breathing room everywhere.** Colour only appears when something is happening.
 
-## Highlights
+<table>
+<tr>
+<td width="33%" valign="top"><b>Card layout</b><br><sub>Sidebar, transfer list, details and status bar sit on one even 8 px grid with soft corners.</sub></td>
+<td width="33%" valign="top"><b>88 outline icons</b><br><sub>Recoloured Fluent UI icons across the toolbar, menus, dialogs and all 14 torrent states.</sub></td>
+<td width="33%" valign="top"><b>Colour with meaning</b><br><sub>Blue downloads, green seeds, amber waits, red errors. Everything else stays neutral.</sub></td>
+</tr>
+<tr>
+<td valign="top"><b>Quiet progress</b><br><sub>Slim underline bars that can follow each row's state colour, plus a rocket / turtle speed switch.</sub></td>
+<td valign="top"><b>Regular or Compact</b><br><sub>Same look with 35 px rows and 9 pt text, so more torrents fit on screen.</sub></td>
+<td valign="top"><b>Everywhere you look</b><br><sub>Main window, Options, Add Torrent, Torrent Creator and a Web UI that follows your system theme.</sub></td>
+</tr>
+</table>
 
-- **Measured card layout** — sidebar, transfer list, details panel, and status bar sit on a uniform 8 px grid with soft rounded corners and subtle hairline borders.
-- **88 outline icons** — recoloured Fluent UI System Icons (plus Lucide magnet icons) across the toolbar, menus, dialogs, and all 14 torrent states.
-- **Semantic state colour** — blue for downloading, green for seeding, amber for waiting, red for errors; neutral surfaces everywhere else.
-- **Readable progress & controls** — slim underline progress bars that can match row state colours, pill-style detail tabs, and a rocket/turtle speed-limit toggle.
-- **Consistent across surfaces** — covers the main window, Options, Add Torrent, Torrent Creator, and a matching Light/Dark Web UI that follows your system theme.
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/gallery-dark.svg"><img src=".github/assets/headings/gallery-light.svg" alt="Gallery" height="31"></picture>
 
-## Compatibility
+<p align="center">
+  <a href="https://ibb.co.com/VWftgSbG"><img src=".github/assets/gallery/01-pc-main-light.png" alt="Main window, Light" width="47%"></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://ibb.co.com/0pzzVD7R"><img src=".github/assets/gallery/02-pc-main-dark.png" alt="Main window, Dark" width="47%"></a>
+</p>
+<p align="center">
+  <a href="https://ibb.co.com/svD50TPc"><img src=".github/assets/gallery/03-pc-options-light.png" alt="Options, Light" width="47%"></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://ibb.co.com/Mk2DrCx8"><img src=".github/assets/gallery/04-pc-options-dark.png" alt="Options, Dark" width="47%"></a>
+</p>
+<p align="center">
+  <a href="https://ibb.co.com/Z6BHZCKp"><img src=".github/assets/gallery/05-webui-light.png" alt="Web UI, Light" width="47%"></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://ibb.co.com/RGVgLSKb"><img src=".github/assets/gallery/06-webui-dark.png" alt="Web UI, Dark" width="47%"></a>
+</p>
 
-| Target | Supported Versions | Platform |
-| :--- | :--- | :--- |
-| **Desktop App** | qBittorrent 5.3 | Windows 10 & 11 (works with or without Inter) |
-| **Web UI** | qBittorrent 5.2.3 & 5.3.0 | Windows & Linux (tested on qBittorrent-nox / Raspberry Pi 4) |
+<p align="center"><sub>Click any shot for full size · <a href="https://ibb.co.com/album/y6b6dZ">Full album</a> · <a href="https://noorjahan.hamim2964.workers.dev/#compare">Interactive before &amp; after</a></sub></p>
 
-## Download & Setup
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/install-dark.svg"><img src=".github/assets/headings/install-light.svg" alt="Install" height="31"></picture>
 
-All official packages (`Noorjahan-Setup.zip`, `Noorjahan-Light.qbtheme`, `Noorjahan-Dark.qbtheme`, and `Noorjahan-WebUI.zip`) are free to download from the website:
+Everything is free on the **[website](https://noorjahan.hamim2964.workers.dev/#download)** and attached to every **[GitHub release](https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest)** with a `SHA256SUMS.txt`.
 
-**[→ Download Noorjahan v1.2.2](https://noorjahan.hamim2964.workers.dev/#download)**
+### <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/desktop-dark.svg"><img src=".github/assets/headings/desktop-light.svg" alt="Desktop · Windows 10 &amp; 11" height="24"></picture>
 
-### Windows — Quick Setup
-1. Download `Noorjahan-Setup.zip` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and extract it.
-2. Run **`Install Noorjahan.cmd`** — installs both themes and the [Inter](https://rsms.me/inter/) font for your user (no admin needed), backs up `qBittorrent.ini`, and can switch the theme on automatically.
+**The easy way.** Download `Noorjahan-Setup.zip`, extract it and run **`Install Noorjahan.cmd`**. It installs all four themes and the [Inter](https://rsms.me/inter/) font for your user (no admin needed), backs up `qBittorrent.ini`, and can switch the theme on for you.
 
-### Windows — Manual Setup
-1. Download `Noorjahan-Light.qbtheme` or `Noorjahan-Dark.qbtheme` from [the website](https://noorjahan.hamim2964.workers.dev/#download) and save it in a permanent folder (e.g. `%APPDATA%\qBittorrent\themes`).
-2. Open **Tools › Options › Behavior**, enable **Use custom UI theme**, and select the `.qbtheme` file.
-3. On the same page, set **Style** to **`windows11`** (or **`windowsvista`** on Windows 10), then restart qBittorrent.
+<details>
+<summary><b>By hand</b></summary>
+<br>
 
-### Web UI
-1. Download and extract `Noorjahan-WebUI.zip` from [the website](https://noorjahan.hamim2964.workers.dev/#download).
-2. Open **Tools › Options › Web UI**, enable **Use alternative WebUI**, and select the `Noorjahan-WebUI` folder.
-3. Hard-refresh the Web UI in your browser (`Ctrl+F5`).
+1. Download one `.qbtheme` (Light, Dark, Light Compact or Dark Compact) and keep it somewhere permanent, such as `%APPDATA%\qBittorrent\themes`.
+2. In **Tools › Options › Behavior**, tick **Use custom UI theme** and pick the file.
+3. On the same page, set **Style** to **`windows11`** (`windowsvista` on Windows 10), then restart qBittorrent. The Style option arrived in qBittorrent 5.0.1; on older versions skip this step.
+
+The theme works without Inter and falls back to Segoe UI. Inter gives the exact spacing it was designed with.
+
+</details>
 
 > [!TIP]
-> In **Behavior › Transfer List**, enable **Make progress bars follow text colors** so each progress bar matches its torrent's state colour (blue while downloading, green while seeding).
+> In **Behavior › Transfer List**, turn on **Make progress bars follow text colors** so every bar matches its torrent: blue while downloading, green while seeding.
 
-## Building from Source
+### <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/web-ui-dark.svg"><img src=".github/assets/headings/web-ui-light.svg" alt="Web UI" height="24"></picture>
 
-This repository contains the theme source (`src/`), Windows installer scripts (`setup/`), and Web UI typography assets (`fonts/`). To compile `.qbtheme` bundles locally, install `PySide6-Essentials` (which bundles `rcc.exe`) and run:
+1. Download `Noorjahan-WebUI.zip` and extract it.
+2. In **Tools › Options › Web UI**, tick **Use alternative WebUI** and pick the `Noorjahan-WebUI` folder.
+3. Hard-refresh the page (`Ctrl+F5`).
+
+<details>
+<summary><b>Updating the Web UI</b></summary>
+<br>
+
+From 1.2.4 the Web UI checks GitHub once a day and shows a small notice when a newer release is out. It never installs anything by itself, because qBittorrent can't let a web page write to its own folder. Turn the check off with **Stop checking** in the notice or **Help › Noorjahan update check**. The check is a plain request to `api.github.com`, so GitHub sees your IP address; no cookies or referrer are sent, and the setting stays in your browser.
+
+To update, run the updater. It finds your `Noorjahan-WebUI` folder from qBittorrent's settings, checks the download's SHA-256, keeps the old folder as a backup and swaps in the new one. Reload the page; qBittorrent does not need a restart.
+
+**Windows (PowerShell)**
+```powershell
+irm https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/update-webui.ps1 -OutFile update-webui.ps1
+powershell -ExecutionPolicy Bypass -File .\update-webui.ps1
+```
+
+**Linux / Raspberry Pi** (as the user that owns the folder)
+```bash
+curl -fsSLO https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/update-webui.sh
+bash update-webui.sh
+```
+
+Options: `-Path` / `--path` to name the folder, `-Check` / `--check` to only look, `-Yes` / `--yes` to skip the question, `-KeepBackups` / `--keep-backups` (default 3).
+
+The desktop `.qbtheme` can't be swapped while qBittorrent runs, so it has no in-app notice: download the new file and restart qBittorrent.
+
+</details>
+
+<details>
+<summary><b>Direct download links</b></summary>
+<br>
+
+Release files keep the same names every time, so the newest one is always at:
+
+```
+https://github.com/chiefhamim/noorjahan-qbittorrent/releases/latest/download/<file name>
+```
+
+`Noorjahan-Setup.zip` · `Noorjahan-Light.qbtheme` · `Noorjahan-Dark.qbtheme` · `Noorjahan-Light-Compact.qbtheme` · `Noorjahan-Dark-Compact.qbtheme` · `Noorjahan-WebUI.zip`
+
+</details>
+
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/compatibility-dark.svg"><img src=".github/assets/headings/compatibility-light.svg" alt="Compatibility" height="31"></picture>
+
+| | Works on | Looks best on | Platform |
+| :-- | :-- | :-- | :-- |
+| **Desktop theme** | qBittorrent **4.6.0** and newer | 5.0.1 and newer | Windows 10 & 11, with or without Inter |
+| **Web UI** | qBittorrent **5.2.0** and newer | 5.2.x and 5.3.0 | Windows & Linux, tested on qBittorrent-nox on a Raspberry Pi 4 |
+
+<details>
+<summary><b>How these were tested, and what older versions miss</b></summary>
+<br>
+
+Fourteen qBittorrent releases from 4.2.5 to 5.3.0 were run in a sandbox with every theme and compared against 5.3.0.
+
+- **Desktop, 5.0.1 and newer:** identical to 5.3.0.
+- **Desktop, 4.6.0 to 5.0.0:** the same look, but these versions have no Style option. 5.0.0 picks `windows11` by itself on Windows 11; 4.6 uses `windowsvista`, so menus and drop-downs keep square corners.
+- **Desktop, 4.5.x and older:** not supported. Text turns bold and the sidebar loses its card, and 4.4 and older use different icon names, so about 75 icons stay stock.
+- **Web UI, 5.0.x and 5.1.x:** it loads, but these versions lack parts of the Web UI API it uses. Saved Web UI settings, the Add Torrent dialog's torrent preview and piece availability fail, and the tracker error count reads NaN.
+- **Web UI, 4.6.x:** Start and Stop do nothing (the API calls them pause and resume there).
+
+</details>
+
+<details>
+<summary><b>Build from source</b></summary>
+<br>
+
+The repo holds the theme source (`src/`), the Windows installer (`setup/`) and the Web UI fonts (`fonts/`). Install `PySide6-Essentials` (it ships `rcc.exe`) and run:
 
 ```bash
 python src/build.py <path-to-rcc.exe>
 ```
 
-This writes `build/light`, `build/dark`, and `dist/Noorjahan Light.qbtheme` / `dist/Noorjahan Dark.qbtheme`. See [CHANGELOG.md](CHANGELOG.md) for the release history.
+This writes `build/light`, `build/dark`, `build/light-compact`, `build/dark-compact` and the four bundles in `dist/`.
 
-## Credits & License
+</details>
+
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/headings/credits-dark.svg"><img src=".github/assets/headings/credits-light.svg" alt="Credits &amp; License" height="31"></picture>
 
 Noorjahan's architecture, visual design, Qt stylesheet, icon recolouring, Web UI restyle, and installer are by [chiefhamim](https://github.com/chiefhamim) and are licensed under [GPL-2.0-or-later](LICENSE). Not affiliated with the qBittorrent project.
 
@@ -92,6 +184,8 @@ Noorjahan's architecture, visual design, Qt stylesheet, icon recolouring, Web UI
 | Icons (86 of 88) | [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons) by Microsoft | MIT |
 | Magnet icons (2 of 88) | [Lucide](https://lucide.dev) | ISC |
 | Typefaces | [Inter](https://rsms.me/inter/) · [Geist](https://vercel.com/font) | SIL OFL 1.1 |
+
+<br>
 
 ---
 
